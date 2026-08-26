@@ -15,8 +15,8 @@ import (
 	"github.com/usbarmory/tamago/soc/aifoundry/etsoc1"
 )
 
-//go:linkname ramStackOffset runtime/goos.RamStackOffset
-var ramStackOffset uint64 = 0x10000 // give room to tasks stack (see smp.go)
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+var ramStackOffset uintptr = 0x10000 // give room to tasks stack (see smp.go)
 
 // Init takes care of the lower level initialization triggered early in runtime
 // setup (e.g. runtime/goos.Hwinit1).

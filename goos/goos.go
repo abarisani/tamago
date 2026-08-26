@@ -19,8 +19,7 @@
 // For OS supported examples see the following tamago packages: [linux],
 // [applet].
 //
-// This package is a stub and is only used for documentation purposes,
-// applications need to define the described functions/variables or import them
+// Applications need to define the described functions/variables or import them
 // from external packages (such as the ones provided by [tamago]) relevant to
 // the target environment.
 //
@@ -34,26 +33,9 @@ package goos
 
 import "unsafe"
 
-// Required variables.
-var (
-	// RamStart defines the start address of the physical or virtual memory
-	// available to the runtime for allocation (including the code segment
-	// which must be mapped within).
-	RamStart uint
-
-	// RamSize defines the total size of the physical or virtual memory
-	// available to the runtime for allocation (including the code segment
-	// which must be mapped within).
-	RamSize uint
-
-	// RamStackOffset, defines the negative offset from the end of the
-	// available memory for stack allocation.
-	RamStackOffset uint
-)
-
 // CPUInit handles immediate startup CPU initialization as it represents the
 // first instruction set executed.
-func CPUinit()
+func CPUInit()
 
 // Hwinit0 takes care of the lower level initialization triggered before
 // runtime setup (pre World start).
@@ -116,3 +98,26 @@ var (
 	// processor.
 	Wake func(procid uint64)
 )
+
+// The following variables are specific to this overlay.
+var (
+	// RamStart defines the start address of the physical or virtual memory
+	// available to the runtime for allocation (including the code segment
+	// which must be mapped within).
+	RamStart uintptr
+
+	// RamSize defines the total size of the physical or virtual memory
+	// available to the runtime for allocation (including the code segment
+	// which must be mapped within).
+	RamSize uintptr
+
+	// RamStackOffset, defines the negative offset from the end of the
+	// available memory for stack allocation.
+	RamStackOffset uintptr
+)
+
+// MemRegion returns the start and end addresses of the physical RAM assigned
+// to the Go runtime.
+func MemRegion() (start uintptr, end uintptr) {
+	return RamStart, RamStart + RamSize
+}

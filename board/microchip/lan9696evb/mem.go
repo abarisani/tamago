@@ -25,5 +25,5 @@ import (
 //
 //	https://github.com/microchip-ung/arm-trusted-firmware/tree/main/plat/microchip/lan969x/fdts/lan969x-ddr.dtsi
 //
-//go:linkname ramSize runtime/goos.RamSize
-var ramSize uint64 = 0x38000000 // 896MB
+//go:linkname ramSize github.com/usbarmory/tamago/goos.RamSize
+var ramSize uintptr = 0x38000000 // 896MB

@@ -47,8 +47,8 @@ const (
 	ICR_DST_REST = lapic.ICR_DST_REST
 )
 
-//go:linkname ramStackOffset runtime/goos.RamStackOffset
-var ramStackOffset uint64 = 0x100000 // 1 MB
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+var ramStackOffset uintptr = 0x100000 // 1 MB
 
 // CPU represents the Bootstrap Processor (BSP) instance.
 type CPU struct {

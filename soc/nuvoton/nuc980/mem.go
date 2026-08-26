@@ -17,5 +17,5 @@ import (
 // ramStart is the base of DDR SDRAM on the NUC980.
 // The ARM926EJ-S exception vectors are also placed here (fixed at 0x00000000).
 //
-//go:linkname ramStart runtime/goos.RamStart
-var ramStart uint32 = 0x00000000
+//go:linkname ramStart github.com/usbarmory/tamago/goos.RamStart
+var ramStart uintptr = 0x00000000

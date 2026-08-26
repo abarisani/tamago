@@ -9,17 +9,17 @@
 #include "go_asm.h"
 #include "textflag.h"
 
-#define CLOCK_REALTIME 0
-
 #define SYS_write		64
 #define SYS_exit		93
 #define SYS_clock_gettime	113
 #define SYS_mmap		222
 #define SYS_getrandom		278
 
+#define CLOCK_REALTIME 0
+
 TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
-	MOVD	runtime∕goos·RamStart(SB), R0
-	MOVD	runtime∕goos·RamSize(SB), R1
+	MOVD	$(const_ramStart), R0
+	MOVD	$(const_ramSize), R1
 	MOVW	$0x3, R2	// PROT_READ | PROT_WRITE
 	MOVW	$0x22, R3	// MAP_PRIVATE | MAP_ANONYMOUS
 	MOVW	$0xffffffff, R4
@@ -28,10 +28,10 @@ TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
 	SVC
 
 	// set stack pointer
-	MOVD	runtime∕goos·RamStart(SB), R1
+	MOVD	$(const_ramStart), R1
 	MOVD	R1, RSP
-	MOVD	runtime∕goos·RamSize(SB), R1
-	MOVD	runtime∕goos·RamStackOffset(SB), R2
+	MOVD	$(const_ramSize), R1
+	MOVD	$(const_ramStackOffset), R2
 	ADD	R1, RSP
 	SUB	R2, RSP
 

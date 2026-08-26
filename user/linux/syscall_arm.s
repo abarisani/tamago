@@ -21,8 +21,8 @@
 #define CLOCK_REALTIME 0
 
 TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
-	MOVW	runtime∕goos·RamStart(SB), R0
-	MOVW	runtime∕goos·RamSize(SB), R1
+	MOVW	$(const_ramStart), R0
+	MOVW	$(const_ramSize), R1
 	MOVW	$0x3, R2	// PROT_READ | PROT_WRITE
 	MOVW	$0x22, R3	// MAP_PRIVATE | MAP_ANONYMOUS
 	MOVW	$0xffffffff, R4
@@ -31,9 +31,9 @@ TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
 	SWI	$0
 
 	// set stack pointer
-	MOVW	runtime∕goos·RamStart(SB), R13
-	MOVW	runtime∕goos·RamSize(SB), R1
-	MOVW	runtime∕goos·RamStackOffset(SB), R2
+	MOVW	$(const_ramStart), R13
+	MOVW	$(const_ramSize), R1
+	MOVW	$(const_ramStackOffset), R2
 	ADD	R1, R13
 	SUB	R2, R13
 

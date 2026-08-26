@@ -16,7 +16,8 @@ package dma
 
 import (
 	"fmt"
-	"runtime"
+
+	goospkg "github.com/usbarmory/tamago/goos"
 )
 
 // NewRegion initializes a memory region for DMA buffer allocation.
@@ -30,8 +31,7 @@ func NewRegion(addr uint, size int, unsafe bool) (r *Region, err error) {
 	start := uint(addr)
 	end := uint(start) + uint(size)
 
-	// returns uint32/uint64 depending on platform
-	rs, re := runtime.MemRegion()
+	rs, re := goospkg.MemRegion()
 	ramStart := uint(rs)
 	ramEnd := uint(re)
 

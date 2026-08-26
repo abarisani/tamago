@@ -11,6 +11,7 @@ package arm64
 import (
 	"runtime"
 
+	goospkg "github.com/usbarmory/tamago/goos"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 
@@ -43,32 +44,32 @@ const (
 	mappingSplit
 )
 
-func alignDown(addr uint64, align uint64) uint64 {
+func alignDown(addr uintptr, align uintptr) uintptr {
 	return addr &^ (align - 1)
 }
 
-func alignUp(addr uint64, align uint64) uint64 {
+func alignUp(addr uintptr, align uintptr) uintptr {
 	return alignDown(addr+align-1, align)
 }
 
 func (m *mmuMap) init() {
-	ramStart, ramEnd := runtime.MemRegion()
+	ramStart, ramEnd := goospkg.MemRegion()
 	textStart, textEnd := runtime.TextRegion()
 
 	if ramStart&(pageTableSize-1) != 0 || ramEnd&(pageTableSize-1) != 0 {
 		panic("RAM region not 4KB aligned")
 	}
 
-	m.ramStart = ramStart
-	m.ramEnd = ramEnd
-	m.textStart = alignDown(textStart, pageTableSize)
-	m.textEnd = alignUp(textEnd, pageTableSize)
+	m.ramStart = uint64(ramStart)
+	m.ramEnd = uint64(ramEnd)
+	m.textStart = uint64(alignDown(textStart, pageTableSize))
+	m.textEnd = uint64(alignUp(textEnd, pageTableSize))
 
-	if m.textStart < ramStart || m.textEnd > ramEnd {
+	if m.textStart < m.ramStart || m.textEnd > m.ramEnd {
 		panic("text region outside RAM")
 	}
 
-	m.arenaNext = ramStart + pageTableArenaOffset
+	m.arenaNext = m.ramStart + pageTableArenaOffset
 	m.arenaEnd = m.textStart
 
 	if m.arenaNext >= m.arenaEnd {

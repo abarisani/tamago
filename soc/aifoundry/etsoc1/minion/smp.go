@@ -9,25 +9,25 @@
 package minion
 
 import (
-	"runtime/goos"
 	"time"
 	"unsafe"
 
+	goospkg "github.com/usbarmory/tamago/goos"
 	"github.com/usbarmory/tamago/internal/reg"
 	"github.com/usbarmory/tamago/soc/aifoundry/etsoc1"
 )
 
 // MaxTasks is used to derive the stack size allocated for each [Task], using
 // the following formula: `ramStackOffset / MaxTasks`.
-var MaxTasks uint64 = 64
+var MaxTasks int = 64
 
 var (
 	// hart initialization counter
 	ncpu int
 
 	// AP task address base, accounting for [alignExceptionHandler]
-	taskBase      = goos.RamStart + 4*2
-	taskStackSize = ramStackOffset / MaxTasks
+	taskBase      = goospkg.RamStart + 4*2
+	taskStackSize = uint64(ramStackOffset) / uint64(MaxTasks)
 )
 
 // defined in smp.s
@@ -58,8 +58,8 @@ type task struct {
 
 func schedule(hart int, gp uint64, pc uint64, wait bool) {
 	// use [ramEnd-ramStackOffset:ramEnd] for tasks stack
-	stk := goos.RamStart + goos.RamSize
-	sp := uint64(stk) - uint64(hart)*(ramStackOffset/MaxTasks)
+	stk := goospkg.RamStart + goospkg.RamSize
+	sp := uint64(stk) - uint64(hart)*(uint64(ramStackOffset)/uint64(MaxTasks))
 
 	// write directly to memory to avoid &task allocation
 	taskAddress := uint64(taskBase) + uint64(hart*24)

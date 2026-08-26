@@ -12,5 +12,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStackOffset runtime/goos.RamStackOffset
-var ramStackOffset uint64 = 0x100
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+var ramStackOffset uintptr = 0x100

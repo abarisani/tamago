@@ -99,8 +99,8 @@ var ARM = &arm.CPU{
 	TimerMultiplier: 1,
 }
 
-//go:linkname ramStackOffset runtime/goos.RamStackOffset
-var ramStackOffset uint32 = 0x100000 // 1 MB
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+var ramStackOffset uintptr = 0x100000 // 1 MB
 
 //go:linkname nanotime runtime/goos.Nanotime
 func nanotime() int64 {

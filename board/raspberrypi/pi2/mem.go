@@ -14,5 +14,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramSize runtime/goos.RamSize
-var ramSize uint32 = 0x40000000 - 0x4C00000 // 1GB - 76MB (VideoCore)
+//go:linkname ramSize github.com/usbarmory/tamago/goos.RamSize
+var ramSize uintptr = 0x40000000 - 0x4C00000 // 1GB - 76MB (VideoCore)

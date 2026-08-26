@@ -27,8 +27,8 @@ const (
 	IMX6ULL = 0x65
 )
 
-//go:linkname ramStackOffset runtime/goos.RamStackOffset
-var ramStackOffset uint32 = 0x100
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+var ramStackOffset uintptr = 0x100
 
 var (
 	// Processor family

@@ -11,6 +11,7 @@ package arm
 import (
 	"runtime"
 
+	goospkg "github.com/usbarmory/tamago/goos"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 
@@ -56,13 +57,19 @@ const (
 func flush_tlb()
 func set_ttbr0(addr uint32)
 
+func regions() (ramStart, ramEnd, textEnd uint32) {
+	mStart, mEnd := goospkg.MemRegion()
+	_, tEnd := runtime.TextRegion()
+
+	return uint32(mStart), uint32(mEnd), uint32(tEnd)
+}
+
 // First level address translation
 // 9.4, ARM® Cortex™ -A Series Programmer’s Guide
 func (cpu *CPU) initL1Table(entry int, ttbr uint32, section uint32) {
 	n := 20 // 1MB
 
-	ramStart, ramEnd := runtime.MemRegion()
-	_, textEnd := runtime.TextRegion()
+	ramStart, ramEnd, textEnd := regions()
 
 	for i := uint32(entry); i < l1pageTableSize; i++ {
 		page := ttbr + 4*i
@@ -93,8 +100,7 @@ func (cpu *CPU) initL1Table(entry int, ttbr uint32, section uint32) {
 func (cpu *CPU) initL2Table(entry int, base uint32, section uint32) {
 	n := 12 // 4KB
 
-	ramStart, ramEnd := runtime.MemRegion()
-	_, textEnd := runtime.TextRegion()
+	ramStart, ramEnd, textEnd := regions()
 
 	memoryRegion := TTE_AP_001<<4 | TTE_CACHEABLE | TTE_BUFFERABLE | TTE_SECTION
 	deviceRegion := TTE_AP_001<<4 | TTE_SECTION

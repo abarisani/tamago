@@ -18,59 +18,59 @@
 #define CLOCK_REALTIME 0
 
 TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
-	MOV	$(const_ramStart), A0
-	MOV	$(const_ramSize), A1
-	MOV	$0x3, A2	// PROT_READ | PROT_WRITE
-	MOV	$0x22, A3	// MAP_PRIVATE | MAP_ANONYMOUS
-	MOV	$0xffffffff, A4
-	MOV	$0, A5
-	MOV	$SYS_mmap, A7
-	ECALL
+	MOVV	$(const_ramStart), R4
+	MOVV	$(const_ramSize), R5
+	MOVV	$0x3, R6	// PROT_READ | PROT_WRITE
+	MOVV	$0x22, R7	// MAP_PRIVATE | MAP_ANONYMOUS
+	MOVV	$0xffffffff, R8
+	MOVV	$0, R9
+	MOVV	$SYS_mmap, R11
+	SYSCALL
 
 	// set stack pointer
-	MOV	$(const_ramStart), X2
-	MOV	$(const_ramSize), T1
-	MOV	$(const_ramStackOffset), T2
-	ADD	T1, X2
-	SUB	T2, X2
+	MOVV	$(const_ramStart), R3
+	MOVV	$(const_ramSize), R13
+	MOVV	$(const_ramStackOffset), R14
+	ADDV	R13, R3
+	SUBV	R14, R3
 
 	JMP	_rt0_tamago_start(SB)
 
 // func sys_clock_gettime() int64
 TEXT ·sys_clock_gettime(SB),NOSPLIT,$40-8
-	MOV	$CLOCK_REALTIME, A0
-	MOV	$8(X2), A1
-	MOV	$SYS_clock_gettime, A7
-	ECALL
-	MOV	8(X2), T0	// sec
-	MOV	16(X2), T1	// nsec
-	MOV	$1000000000, T2
-	MUL	T2, T0
-	ADD	T1, T0
-	MOV	T0, ns+0(FP)
+	MOVV	$CLOCK_REALTIME, R4
+	MOVV	$8(R3), R5
+	MOVV	$SYS_clock_gettime, R11
+	SYSCALL
+	MOVV	8(R3), R12	// sec
+	MOVV	16(R3), R13	// nsec
+	MOVV	$1000000000, R14
+	MULVU	R14, R12, R12
+	ADDV	R13, R12, R12
+	MOVV	R12, ns+0(FP)
 	RET
 
 // func sys_exit(code int32)
 TEXT ·sys_exit(SB), $0-4
-	MOVW	code+0(FP), A0
-	MOV	$SYS_exit, A7
-	ECALL
+	MOVW	code+0(FP), R3
+	MOVV	$SYS_exit, R11
+	SYSCALL
 	RET
 
 // func sys_write(c *byte)
 TEXT ·sys_write(SB),NOSPLIT,$0-8
-	MOV	$1, A0		// fd
-	MOV	c+0(FP), A1	// p
-	MOV	$1, A2		// n
-	MOV	$SYS_write, A7
-	ECALL
+	MOVV	$1, R4		// fd
+	MOVV	c+0(FP), R5	// p
+	MOVV	$1, R6		// n
+	MOVV	$SYS_write, R11
+	SYSCALL
 	RET
 
 // func sys_getrandom(b []byte, n int)
 TEXT ·sys_getrandom(SB), $0-32
-	MOV	b+0(FP), A0
-	MOV	n+24(FP), A1
-	MOV	$0, A2
-	MOV	$SYS_getrandom, A7
-	ECALL
+	MOVV	b+0(FP), R4
+	MOVV	n+24(FP), R5
+	MOVV	$0, R6
+	MOVV	$SYS_getrandom, R11
+	SYSCALL
 	RET

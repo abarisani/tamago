@@ -14,9 +14,9 @@ TEXT ·Init(SB),NOSPLIT|NOFRAME,$0
 	WORD	$0x04000824	// csrwr R4, EUEN(0x2)
 
 	// set stack pointer to RamStart + RamSize - RamStackOffset
-	MOVV	runtime∕goos·RamStart(SB), R3
-	MOVV	runtime∕goos·RamSize(SB), R5
-	MOVV	runtime∕goos·RamStackOffset(SB), R6
+	MOVV	github·com∕usbarmory∕tamago∕goos·RamStart(SB), R3
+	MOVV	github·com∕usbarmory∕tamago∕goos·RamSize(SB), R5
+	MOVV	github·com∕usbarmory∕tamago∕goos·RamStackOffset(SB), R6
 	ADDVU	R5, R3, R3
 	SUBVU	R6, R3, R3
 

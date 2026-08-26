@@ -14,5 +14,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStart runtime/goos.RamStart
-var ramStart uint64 = 0x80000000
+//go:linkname ramStart github.com/usbarmory/tamago/goos.RamStart
+var ramStart uintptr = 0x80000000

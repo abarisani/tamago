@@ -18,14 +18,11 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStart runtime/goos.RamStart
-var ramStart uint64 = 0x80000000
-
-//go:linkname ramSize runtime/goos.RamSize
-var ramSize uint64 = 0x20000000 // 512MB
-
-//go:linkname ramStackOffset runtime/goos.RamStackOffset
-var ramStackOffset uint64 = 0x100
+const (
+	ramStart       uint = 0x80000000
+	ramSize        uint = 0x20000000 // 512MB
+	ramStackOffset uint = 0x100
+)
 
 // defined in syscall_*.s
 func sys_exit(code int32)

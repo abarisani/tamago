@@ -16,5 +16,5 @@ import (
 	"github.com/usbarmory/tamago/soc/aifoundry/etsoc1"
 )
 
-//go:linkname ramStart runtime/goos.RamStart
-var ramStart uint64 = etsoc1.DRAM_BASE
+//go:linkname ramStart github.com/usbarmory/tamago/goos.RamStart
+var ramStart uintptr = etsoc1.DRAM_BASE
