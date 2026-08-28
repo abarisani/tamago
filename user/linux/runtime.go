@@ -14,8 +14,9 @@
 package linux_user
 
 import (
-	"runtime/goos"
 	_ "unsafe"
+
+	"github.com/usbarmory/tamago/goospkg"
 )
 
 const (
@@ -30,15 +31,15 @@ func sys_write(c *byte)
 func sys_clock_gettime() (ns int64)
 func sys_getrandom(b []byte, n int)
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return sys_clock_gettime()
 }
 
-//go:linkname initRNG runtime/goos.InitRNG
+//go:linkname initRNG internal/runtime/goospkg.InitRNG
 func initRNG() {}
 
-//go:linkname getRandomData runtime/goos.GetRandomData
+//go:linkname getRandomData internal/runtime/goospkg.GetRandomData
 func getRandomData(b []byte) {
 	sys_getrandom(b, len(b))
 }
@@ -46,18 +47,18 @@ func getRandomData(b []byte) {
 // preallocated memory to avoid malloc during panic
 var a [1]byte
 
-//go:linkname printk runtime/goos.Printk
+//go:linkname printk internal/runtime/goospkg.WriteConsole
 func printk(c byte) {
 	a[0] = c
 	sys_write(&a[0])
 }
 
-//go:linkname hwinit0 runtime/goos.Hwinit0
-func hwinit0() {
+//go:linkname inithw0 internal/runtime/goospkg.InitHW0
+func inithw0() {
 	goos.Bloc = uintptr(ramStart)
 }
 
-//go:linkname hwinit1 runtime/goos.Hwinit1
-func hwinit1() {
+//go:linkname inithw1 internal/runtime/goospkg.InitHW1
+func inithw1() {
 	goos.Exit = sys_exit
 }

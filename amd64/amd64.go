@@ -20,10 +20,10 @@ package amd64
 import (
 	"math"
 	"runtime"
-	"runtime/goos"
 	_ "unsafe"
 
 	"github.com/usbarmory/tamago/amd64/lapic"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 
@@ -47,7 +47,7 @@ const (
 	ICR_DST_REST = lapic.ICR_DST_REST
 )
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
 var ramStackOffset uintptr = 0x100000 // 1 MB
 
 // CPU represents the Bootstrap Processor (BSP) instance.

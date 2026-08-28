@@ -14,5 +14,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStart github.com/usbarmory/tamago/goos.RamStart
+//go:linkname ramStart github.com/usbarmory/tamago/goospkg.RamStart
 var ramStart uintptr = DDR_BASE

@@ -18,7 +18,7 @@ import (
 	"github.com/usbarmory/tamago/soc/nxp/caam"
 )
 
-//go:linkname initRNG runtime/goos.InitRNG
+//go:linkname initRNG internal/runtime/goospkg.InitRNG
 func initRNG() {
 	_, Family, _ = SiliconVersion()
 

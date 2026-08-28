@@ -21,8 +21,8 @@ The TamaGo framework consists of the following components:
 
  - A modified [Go distribution](https://github.com/usbarmory/tamago-go)
    which extends `GOOS` support to the `tamago` target, allowing bare metal
-   execution through a [runtime/goos](https://github.com/usbarmory/tamago-go/tree/latest/src/runtime/goos)
-   overlay set by `GOOSPKG`.
+   execution through an overlay for [internal/runtime/goospkg](https://github.com/usbarmory/tamago-go/tree/latest/src/internal/runtime/goospkg)
+   set by `GOOSPKG`.
 
  - Go packages for processor/SoC support.
 
@@ -133,8 +133,9 @@ Userspace targets
 =================
 
 The execution of programs compiled with `GOOS=tamago` can also take place in
-user space by importing any package that implements the required `runtime/goos`
-overlay with OS supervision instead of bare metal drivers.
+user space by importing any package that implements the required
+`internal/runtime/goospkg` overlay with OS supervision instead of bare metal
+drivers.
 
 Compiling and running Go programs in user space as `GOOS=tamago` provides the
 benefit of system call isolation as the executable cannot leverage on the Go
@@ -146,11 +147,11 @@ runtime to directly access OS resources, this results in:
 
 The following table summarizes currently available userspace support:
 
-| Operating System                             | `GOARCH`                | Runtime packages                                                                     |
-|----------------------------------------------|-------------------------|--------------------------------------------------------------------------------------|
-| [Linux](https://www.kernel.org/)             | amd64,arm,arm64,riscv64 | [runtime/goos](https://github.com/usbarmory/tamago-go/blob/latest/src/runtime/goos)¹ |
-| [Linux](https://www.kernel.org/)             | amd64,arm,arm64,riscv64 | [linux](https://github.com/usbarmory/tamago/tree/master/user/linux)                  |
-| [GoTEE](https://github.com/usbarmory/GoTEE/) |             arm,riscv64 | [applet](https://pkg.go.dev/github.com/usbarmory/GoTEE/applet)                       |
+| Operating System                             | `GOARCH`                | Runtime packages                                                                            |
+|----------------------------------------------|-------------------------|---------------------------------------------------------------------------------------------|
+| [Linux](https://www.kernel.org/)             | amd64,arm,arm64,riscv64 | [goospkg](https://github.com/usbarmory/tamago-go/blob/latest/src/internal/runtime/goospkg)¹ |
+| [Linux](https://www.kernel.org/)             | amd64,arm,arm64,riscv64 | [linux](https://github.com/usbarmory/tamago/tree/master/user/linux)                         |
+| [GoTEE](https://github.com/usbarmory/GoTEE/) |             arm,riscv64 | [applet](https://pkg.go.dev/github.com/usbarmory/GoTEE/applet)                              |
 
 ¹ Used to run [standard distribution tests](https://github.com/usbarmory/tamago/wiki/Compatibility) and `go test -tags user_linux`
 
@@ -215,7 +216,7 @@ Go applications can be compiled with the compiler built in the previous step,
 with the addition of a few flags/variables:
 
 ```sh
-# set this library as `runtime/goos` overlay
+# set this library as `internal/runtime/goospkg` overlay
 export GOOSPKG=github.com/usbarmory/tamago
 
 # Example for Cloud Hypervisory, QEMU and Firecracker KVMs
@@ -247,7 +248,7 @@ Build tags
 ==========
 
 The following build tags allow applications to override the package own
-definition for the `runtime/goos` overlay:
+definition for the `internal/runtime/goospkg` overlay:
 
 * `linkramstart`: override `ramStart`
 * `linkramsize`: override `ramSize`
@@ -300,7 +301,7 @@ Additional resources
 ====================
 
 * [Package API](https://pkg.go.dev/github.com/usbarmory/tamago)
-* [Runtime API](https://github.com/usbarmory/tamago-go/blob/latest/src/runtime/goos/README.md)
+* [Runtime API](https://pkg.go.dev/github.com/usbarmory/tamago/goospkg)
 * [Compatibility](https://github.com/usbarmory/tamago/wiki/Compatibility)
 * [Internals](https://github.com/usbarmory/tamago/wiki/Internals)
 * [FAQ](https://github.com/usbarmory/tamago/wiki/Frequently-Asked-Questions-(FAQ))

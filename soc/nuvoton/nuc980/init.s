@@ -33,7 +33,7 @@ TEXT ·EarlyClockInit(SB),NOSPLIT|NOFRAME,$0
 	BIC	$const_CLK_DIV8_ECLK_XIN, R1
 	MOVW	R1, (R0)
 
-	// UART0 8N1 @115200 from 12 MHz XIN for pre-Hwinit1 Printk
+	// UART0 8N1 @115200 from 12 MHz XIN
 	MOVW	$(const_UA0_BA+0x0c), R0	// UA_LCR
 	MOVW	$0x3, R1			// 8-bit word, 1 stop, no parity
 	MOVW	R1, (R0)
@@ -72,9 +72,9 @@ vecloop:
 	BL	clearBSS(SB)
 
 	// set stack pointer
-	MOVW	github·com∕usbarmory∕tamago∕goos·RamStart(SB), R13
-	MOVW	github·com∕usbarmory∕tamago∕goos·RamSize(SB), R1
-	MOVW	github·com∕usbarmory∕tamago∕goos·RamStackOffset(SB), R2
+	MOVW	github·com∕usbarmory∕tamago∕goospkg·RamStart(SB), R13
+	MOVW	github·com∕usbarmory∕tamago∕goospkg·RamSize(SB), R1
+	MOVW	github·com∕usbarmory∕tamago∕goospkg·RamStackOffset(SB), R2
 	ADD	R1, R13
 	SUB	R2, R13
 	MOVW	R13, R3

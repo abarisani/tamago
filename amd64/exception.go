@@ -9,8 +9,7 @@
 package amd64
 
 import (
-	"runtime/goos"
-
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/exception"
 )
 

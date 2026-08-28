@@ -16,5 +16,5 @@ import (
 
 // Applications can override ramSize with the `linkramsize` build tag.
 //
-//go:linkname ramSize github.com/usbarmory/tamago/goos.RamSize
+//go:linkname ramSize github.com/usbarmory/tamago/goospkg.RamSize
 var ramSize uintptr = 0x10000000 // 256MB

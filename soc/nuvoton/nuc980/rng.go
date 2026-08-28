@@ -24,14 +24,14 @@ var PRNG = &prng.PRNG{
 	Base: CRPT_BA,
 }
 
-//go:linkname initRNG runtime/goos.InitRNG
+//go:linkname initRNG internal/runtime/goospkg.InitRNG
 func initRNG() {
 	// Enable the CRPT AHB clock before the runtime can call GetRandomData.
-	// InitRNG fires before Hwinit1, so the clock must be gated here rather
+	// InitRNG fires before InithW1, so the clock must be gated here rather
 	// than in nuc980.Init() to avoid a busy-wait on an unclocked peripheral.
 	reg.Or(REG_CLK_HCLKEN, HCLKEN_CRPT)
 
-	// InitRNG also fires before Hwinit1, so start the timer here to make
+	// InitRNG also fires before InitHW1, so start the timer here to make
 	// nanotime() usable as a seed source.
 	initTimer()
 	PRNG.Seed(uint32(nanotime()))

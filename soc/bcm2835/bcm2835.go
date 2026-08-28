@@ -37,16 +37,16 @@ var ARM = &arm.CPU{
 	TimerMultiplier: 1,
 }
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
 var ramStackOffset uintptr = 0x100000 // 1 MB
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return int64(float64(read_systimer())*ARM.TimerMultiplier) + ARM.TimerOffset
 }
 
 // Init takes care of the lower level initialization triggered early in runtime
-// setup (e.g. runtime/goos.Hwinit1).
+// setup (e.g. internal/runtime/goospkg.InitHW1).
 func Init(base uint32) {
 	peripheralBase = base
 

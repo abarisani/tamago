@@ -19,7 +19,7 @@ import (
 // On the 8MPLUSLPD4-EVK the serial console is UART1, therefore standard
 // output is redirected there.
 
-//go:linkname printk runtime/goos.Printk
+//go:linkname printk internal/runtime/goospkg.WriteConsole
 func printk(c byte) {
 	imx8mp.UART1.Tx(c)
 }

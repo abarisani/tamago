@@ -7,9 +7,9 @@
 // that can be found in the LICENSE file.
 
 // When built without the linknanotime tag this file provides the default
-// runtime/goos.Nanotime implementation, reading the CLINT mtime register.
-// Building with -tags linknanotime excludes it so a board package can supply
-// its own time source (see board/nuclei/eval_soc).
+// internal/runtime/goospkg.Nanotime implementation, reading the CLINT mtime
+// register. Building with -tags linknanotime excludes it so a board package
+// can supply its own time source (see board/nuclei/eval_soc).
 //
 //go:build !linknanotime
 
@@ -19,7 +19,7 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return RV64.GetTime()
 }

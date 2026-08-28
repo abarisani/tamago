@@ -16,7 +16,7 @@ import (
 	"github.com/usbarmory/tamago/soc/sifive/fu540"
 )
 
-//go:linkname printk runtime/goos.Printk
+//go:linkname printk internal/runtime/goospkg.WriteConsole
 func printk(c byte) {
 	fu540.UART0.Tx(c)
 }

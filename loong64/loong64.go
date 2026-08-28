@@ -19,8 +19,9 @@ package loong64
 
 import (
 	"math"
-	"runtime/goos"
 	"sync"
+
+	"github.com/usbarmory/tamago/goospkg"
 )
 
 // CPU instance

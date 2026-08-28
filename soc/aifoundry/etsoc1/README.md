@@ -68,7 +68,7 @@ Build tags
 ==========
 
 The following build tags allow applications to override the package own
-definition for the `runtime/goos` overlay:
+definition for the `internal/runtime/goospkg` overlay:
 
 * `linkramstart`: exclude `ramStart` from `mem.go`
 * `linkcpuinit`: override `cpuinit` imported from `riscv64/init.s` to park

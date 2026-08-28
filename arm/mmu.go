@@ -11,7 +11,7 @@ package arm
 import (
 	"runtime"
 
-	goospkg "github.com/usbarmory/tamago/goos"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 
@@ -58,7 +58,7 @@ func flush_tlb()
 func set_ttbr0(addr uint32)
 
 func regions() (ramStart, ramEnd, textEnd uint32) {
-	mStart, mEnd := goospkg.MemRegion()
+	mStart, mEnd := goos.MemRegion()
 	_, tEnd := runtime.TextRegion()
 
 	return uint32(mStart), uint32(mEnd), uint32(tEnd)

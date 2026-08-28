@@ -143,7 +143,7 @@ func (hw *USART) Init() {
 
 	hw.init()
 
-	// no defer as goos.Hwinit1 might call us from system stack
+	// no defer as InitHW1 might call us from system stack
 	hw.Unlock()
 }
 

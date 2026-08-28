@@ -17,9 +17,8 @@ package nuc980
 import (
 	_ "unsafe"
 
-	"runtime/goos"
-
 	"github.com/usbarmory/tamago/arm"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 
@@ -99,16 +98,16 @@ var ARM = &arm.CPU{
 	TimerMultiplier: 1,
 }
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
 var ramStackOffset uintptr = 0x100000 // 1 MB
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return int64(readTimerExtended()) * 1000
 }
 
 // Init takes care of the lower level initialization triggered early in runtime
-// setup (e.g. runtime/goos.Hwinit1).
+// setup (e.g. internal/runtime/goospkg.InitHW1).
 func Init() {
 	ARM.Init()
 
@@ -133,7 +132,7 @@ func Init() {
 	UART0.Init()
 
 	// initialize ETimer0 as 1 MHz free-running counter for nanotime
-	// (idempotent; already started by initRNG before Hwinit1)
+	// (idempotent; already started by initRNG before InitHW1)
 	initTimer()
 }
 

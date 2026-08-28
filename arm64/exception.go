@@ -9,10 +9,9 @@
 package arm64
 
 import (
-	"runtime/goos"
 	"unsafe"
 
-	goospkg "github.com/usbarmory/tamago/goos"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/exception"
 	"github.com/usbarmory/tamago/internal/reg"
 )
@@ -82,7 +81,7 @@ func addJumps(addr uint64) {
 //go:nosplit
 func (cpu *CPU) initVectorTable() {
 	// 2048-bytes alignment is required
-	vectorTable := uint64(goospkg.RamStart)
+	vectorTable := uint64(goos.RamStart)
 
 	// initialize jump tables
 	// Table D1-7 ARM Architecture Reference Manual ARMv8

@@ -15,11 +15,11 @@
 package gcp
 
 import (
-	"runtime/goos"
 	_ "unsafe"
 
 	"github.com/usbarmory/tamago/amd64"
 	"github.com/usbarmory/tamago/dma"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/kvm/pvclock"
 	"github.com/usbarmory/tamago/soc/intel/ioapic"
 	"github.com/usbarmory/tamago/soc/intel/rtc"
@@ -69,7 +69,7 @@ var (
 	}
 )
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return AMD64.GetTime()
 }
@@ -77,7 +77,7 @@ func nanotime() int64 {
 // Init takes care of the lower level initialization triggered early in runtime
 // setup (post World start).
 //
-//go:linkname Init runtime/goos.Hwinit1
+//go:linkname Init internal/runtime/goospkg.InitHW1
 func Init() {
 	// initialize BSP
 	AMD64.Init()

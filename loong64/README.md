@@ -49,7 +49,7 @@ Build tags
 ==========
 
 The following build tags allow applications to override the package own
-definition for the `runtime/goos` overlay:
+definition for the `internal/runtime/goospkg` overlay:
 
 * `linkcpuinit`: exclude `cpuinit` from `init.s`
 

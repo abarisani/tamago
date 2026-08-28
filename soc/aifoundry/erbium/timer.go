@@ -28,7 +28,7 @@ func Counter() uint64 {
 	return reg.Read64(ESR_MTIME)
 }
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return RV64.GetTime()
 }

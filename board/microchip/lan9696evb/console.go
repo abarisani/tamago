@@ -18,7 +18,7 @@ import (
 // the on-board serial-to-USB (Type-C port) converter.  The standard output is
 // redirected there.
 
-//go:linkname printk runtime/goos.Printk
+//go:linkname printk internal/runtime/goospkg.WriteConsole
 func printk(c byte) {
 	USART0.Tx(c)
 }

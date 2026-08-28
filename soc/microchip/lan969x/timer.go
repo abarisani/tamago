@@ -20,7 +20,7 @@ func initTimers() {
 	ARM64.InitGenericTimers(SYS_CNT_BASE, 0)
 }
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return ARM64.GetTime()
 }

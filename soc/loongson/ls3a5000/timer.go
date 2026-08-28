@@ -12,7 +12,7 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return LA64.GetTime()
 }

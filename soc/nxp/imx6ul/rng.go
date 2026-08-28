@@ -19,7 +19,7 @@ import (
 	"github.com/usbarmory/tamago/soc/nxp/rngb"
 )
 
-//go:linkname initRNG runtime/goos.InitRNG
+//go:linkname initRNG internal/runtime/goospkg.InitRNG
 func initRNG() {
 	_, fam, revMajor, revMinor := SiliconVersion()
 	Family = fam

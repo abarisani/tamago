@@ -48,7 +48,7 @@ Build tags
 ==========
 
 The following build tags allow applications to override the package own
-definition for the `runtime/goos` overlay:
+definition for the `internal/runtime/goospkg` overlay:
 
 * `linkcpuinit`: include the `cpuinit` boot vector (`boot_riscv64.s`) which
   initializes DDR, cache and the FPU before the runtime starts

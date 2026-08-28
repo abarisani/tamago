@@ -86,7 +86,7 @@ Building applications
 ---------------------
 
 Go applications are required to set `GOOSPKG` to the desired
-[runtime/goos](https://github.com/usbarmory/tamago-go/tree/latest/src/runtime/goos)
+[internal/runtime/goospkg](https://github.com/usbarmory/tamago-go/tree/latest/src/internal/runtime/goospkg)
 overlay and import the relevant board package:
 
 ```golang
@@ -111,7 +111,7 @@ Build tags
 ==========
 
 The following build tags allow applications to override the package own
-definition for the `runtime/goos` overlay:
+definition for the `internal/runtime/goospkg` overlay:
 
 * `linkcpuinit`: include the board reset vector (`cpuinit.s`)
 * `linkramstart`: exclude `ramStart` from the `nuc980` `mem.go`

@@ -9,10 +9,9 @@
 package arm
 
 import (
-	"runtime/goos"
 	"unsafe"
 
-	goospkg "github.com/usbarmory/tamago/goos"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/exception"
 	"github.com/usbarmory/tamago/internal/reg"
 )
@@ -153,7 +152,7 @@ func (cpu *CPU) SetVectorTable(t VectorTable) {
 //go:nosplit
 func (cpu *CPU) initVectorTable() {
 	// 32-bytes alignment is required
-	cpu.vbar = uint32(goospkg.RamStart)
+	cpu.vbar = uint32(goos.RamStart)
 
 	// the application is allowed to override the reserved area
 	if vecTableStart != 0 {

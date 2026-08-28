@@ -19,8 +19,9 @@ package riscv64
 
 import (
 	"math"
-	"runtime/goos"
 	"sync"
+
+	"github.com/usbarmory/tamago/goospkg"
 )
 
 // This package supports 64-bit cores.

@@ -16,5 +16,5 @@ import (
 
 // FSL91030 DRAM is at 0x41000000 (240 MB).
 
-//go:linkname ramStart github.com/usbarmory/tamago/goos.RamStart
+//go:linkname ramStart github.com/usbarmory/tamago/goospkg.RamStart
 var ramStart uintptr = 0x41000000

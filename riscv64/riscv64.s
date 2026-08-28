@@ -21,9 +21,9 @@ TEXT ·Init(SB),NOSPLIT|NOFRAME,$0
 	CSRRS	T0, MSTATUS, ZERO
 
 	// set stack pointer
-	MOV	github·com∕usbarmory∕tamago∕goos·RamStart(SB), X2
-	MOV	github·com∕usbarmory∕tamago∕goos·RamSize(SB), T1
-	MOV	github·com∕usbarmory∕tamago∕goos·RamStackOffset(SB), T2
+	MOV	github·com∕usbarmory∕tamago∕goospkg·RamStart(SB), X2
+	MOV	github·com∕usbarmory∕tamago∕goospkg·RamSize(SB), T1
+	MOV	github·com∕usbarmory∕tamago∕goospkg·RamStackOffset(SB), T2
 	ADD	T1, X2
 	SUB	T2, X2
 

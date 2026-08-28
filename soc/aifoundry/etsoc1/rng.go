@@ -16,7 +16,7 @@ import (
 	"github.com/usbarmory/tamago/internal/rng"
 )
 
-//go:linkname initRNG runtime/goos.InitRNG
+//go:linkname initRNG internal/runtime/goospkg.InitRNG
 func initRNG() {
 	drbg := &rng.DRBG{}
 	binary.LittleEndian.PutUint64(drbg.Seed[:], uint64(time.Now().UnixNano()))

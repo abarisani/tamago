@@ -14,5 +14,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramSize github.com/usbarmory/tamago/goos.RamSize
+//go:linkname ramSize github.com/usbarmory/tamago/goospkg.RamSize
 var ramSize uintptr = 0x20000000 - 0x04000000 // 512MB - 64MB GPU (VideoCore)

@@ -23,8 +23,9 @@ TamaGo is a framework that enables compilation and execution of unencumbered Go
 applications on bare metal processors.
 
 The execution of programs compiled with `GOOS=tamago` can also take place in
-user space by importing any package that implements the required `runtime/goos`
-overlay with OS supervision instead of bare metal drivers.
+user space by importing any package that implements the required
+`internal/runtime/goospkg` overlay with OS supervision instead of bare metal
+drivers.
 
 Compiling and running Go programs in user space as `GOOS=tamago` provides the
 benefit of system call isolation as the executable cannot leverage on the Go
@@ -38,9 +39,9 @@ This package currently supports `GOHOSTOS=linux` with the following `GOARCH`
 values: `amd64`, `arm`, `arm64`, `riscv64`.
 
 > [!NOTE]
-> Go compilers, supporting `GOOS=tamago`, defaults to a `runtime/goos` overlay
-> supporting Linux userspace when `GOOSPKG` is unset, such internal overlay is
-> multi-threaded unlike this package.
+> Go compilers, supporting `GOOS=tamago`, defaults to an overlay for
+> `internal/runtime/goospkg` supporting Linux userspace when `GOOSPKG` is
+> unset, such internal overlay is multi-threaded unlike this package.
 
 Example
 =======

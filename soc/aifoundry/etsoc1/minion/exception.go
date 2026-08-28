@@ -11,7 +11,7 @@ package minion
 import (
 	"unsafe"
 
-	goospkg "github.com/usbarmory/tamago/goos"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 	"github.com/usbarmory/tamago/riscv64"
 )
@@ -36,7 +36,7 @@ func encodeLongJump(ptr, pc uint64) uint64 {
 
 func alignExceptionHandler() {
 	// RamStart is naturally aligned to 0x1000
-	src := uint64(goospkg.RamStart)
+	src := uint64(goos.RamStart)
 	dst := RV64.GetExceptionHandlerAddress()
 
 	reg.Write64(src, encodeLongJump(dst, src))

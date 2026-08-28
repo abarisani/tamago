@@ -19,7 +19,8 @@ package arm64
 
 import (
 	"math"
-	"runtime/goos"
+
+	"github.com/usbarmory/tamago/goospkg"
 )
 
 // CPU instance

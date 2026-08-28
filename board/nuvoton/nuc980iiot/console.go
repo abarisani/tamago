@@ -16,7 +16,7 @@ import (
 	"github.com/usbarmory/tamago/soc/nuvoton/nuc980"
 )
 
-//go:linkname printk runtime/goos.Printk
+//go:linkname printk internal/runtime/goospkg.WriteConsole
 func printk(c byte) {
 	nuc980.UART0.Tx(c)
 }

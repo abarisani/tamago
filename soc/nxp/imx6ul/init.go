@@ -27,7 +27,7 @@ const (
 	IMX6ULL = 0x65
 )
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
 var ramStackOffset uintptr = 0x100
 
 var (
@@ -44,7 +44,7 @@ var (
 )
 
 // Init takes care of the lower level initialization triggered early in runtime
-// setup (e.g. runtime/goos.Hwinit1).
+// setup (e.g. goospkg.InitHW1).
 func Init() {
 	if ARM.Mode() != arm.SYS_MODE {
 		// initialization required only when in PL1

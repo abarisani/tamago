@@ -12,12 +12,12 @@ import (
 	"bytes"
 	"encoding/binary"
 	"runtime"
-	"runtime/goos"
 	"time"
 	"unsafe"
 
 	"github.com/usbarmory/tamago/amd64/lapic"
 	"github.com/usbarmory/tamago/dma"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 

@@ -14,11 +14,11 @@ import (
 	"github.com/usbarmory/tamago/riscv64"
 )
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goos.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
 var ramStackOffset uintptr = 0x100
 
 // Init takes care of the lower level initialization triggered early in runtime
-// setup (e.g. runtime/goos.Hwinit1).
+// setup (e.g. internal/runtime/goospkg.InitHW1).
 func Init() {
 	RV64.Init()
 

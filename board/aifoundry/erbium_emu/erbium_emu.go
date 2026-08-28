@@ -29,7 +29,7 @@ var (
 // Init takes care of the lower level initialization triggered early in runtime
 // setup (post World start).
 //
-//go:linkname Init runtime/goos.Hwinit1
+//go:linkname Init internal/runtime/goospkg.InitHW1
 func Init() {
 	// initialize SoC
 	erbium.Init()

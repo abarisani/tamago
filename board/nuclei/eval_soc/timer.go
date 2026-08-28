@@ -34,7 +34,7 @@ func mulDiv(x, m, d uint64) uint64 {
 	return divx*m + modx*divm + modx*modm/d
 }
 
-//go:linkname nanotime runtime/goos.Nanotime
+//go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime() int64 {
 	return int64(mulDiv(rdtime(), 1e9, TIMER_FREQ))
 }

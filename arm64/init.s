@@ -66,10 +66,10 @@ TEXT ·cpuinit_el1(SB),NOSPLIT|NOFRAME,$0
 	ISB	SY
 
 	// set stack pointer
-	MOVD	github·com∕usbarmory∕tamago∕goos·RamStart(SB), R1
+	MOVD	github·com∕usbarmory∕tamago∕goospkg·RamStart(SB), R1
 	MOVD	R1, RSP
-	MOVD	github·com∕usbarmory∕tamago∕goos·RamSize(SB), R1
-	MOVD	github·com∕usbarmory∕tamago∕goos·RamStackOffset(SB), R2
+	MOVD	github·com∕usbarmory∕tamago∕goospkg·RamSize(SB), R1
+	MOVD	github·com∕usbarmory∕tamago∕goospkg·RamStackOffset(SB), R2
 	ADD	R1, RSP
 	SUB	R2, RSP
 

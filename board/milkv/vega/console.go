@@ -16,7 +16,7 @@ import (
 	fsl "github.com/usbarmory/tamago/soc/fisilink/fsl91030"
 )
 
-//go:linkname printk runtime/goos.Printk
+//go:linkname printk internal/runtime/goospkg.WriteConsole
 func printk(c byte) {
 	fsl.UART0.Tx(c)
 }

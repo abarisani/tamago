@@ -14,7 +14,7 @@ import (
 	"github.com/usbarmory/tamago/internal/rng"
 )
 
-//go:linkname initRNG runtime/goos.InitRNG
+//go:linkname initRNG internal/runtime/goospkg.InitRNG
 func initRNG() {
 	TRNG.Init()
 	rng.GetRandomDataFn = TRNG.GetRandomData

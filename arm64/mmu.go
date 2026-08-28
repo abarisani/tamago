@@ -11,7 +11,7 @@ package arm64
 import (
 	"runtime"
 
-	goospkg "github.com/usbarmory/tamago/goos"
+	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 
@@ -53,7 +53,7 @@ func alignUp(addr uintptr, align uintptr) uintptr {
 }
 
 func (m *mmuMap) init() {
-	ramStart, ramEnd := goospkg.MemRegion()
+	ramStart, ramEnd := goos.MemRegion()
 	textStart, textEnd := runtime.TextRegion()
 
 	if ramStart&(pageTableSize-1) != 0 || ramEnd&(pageTableSize-1) != 0 {
