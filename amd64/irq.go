@@ -17,6 +17,7 @@ import (
 
 	"github.com/usbarmory/tamago/amd64/lapic"
 	"github.com/usbarmory/tamago/dma"
+	"github.com/usbarmory/tamago/goospkg"
 )
 
 // Interrupt Gate Descriptor Attributes
@@ -129,7 +130,7 @@ func (cpu *CPU) ClearInterrupt() {
 	}
 
 	// ensure parent is waiting on channel
-	for !signal.Waiting() {
+	for !goos.SignalReady() {
 		// stay on this M
 	}
 

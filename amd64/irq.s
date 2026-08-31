@@ -119,7 +119,7 @@ TEXT ·handleInterrupt(SB),NOSPLIT|NOFRAME,$0
 	SUBQ	$8, SP
 	MOVQ	$(const_IRQ_SIGNAL), AX
 	MOVQ	AX, (SP)
-	CALL	os∕signal·Relay(SB)
+	CALL	internal∕runtime∕goospkg·SendSignal(SB)
 	ADDQ	$8, SP
 
 	// wake idle APs

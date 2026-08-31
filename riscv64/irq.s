@@ -83,7 +83,7 @@ TEXT ·handleInterrupt(SB),NOSPLIT|NOFRAME,$0
 	SUB	$(32*8), SP
 	MOV	$(const_IRQ_SIGNAL), T0
 	MOV	T0, 8(SP)
-	CALL	os∕signal·Relay(SB)
+	CALL	internal∕runtime∕goospkg·SendSignal(SB)
 	ADD	$(32*8), SP
 
 	// the IRQ handling goroutine is expected to unmask IRQs

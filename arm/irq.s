@@ -83,7 +83,7 @@ TEXT ·irqHandler(SB),NOSPLIT|NOFRAME,$0
 	SUB	$8, R13, R13
 	MOVW	$(const_IRQ_SIGNAL), R0
 	MOVW	R0, 4(R13)
-	CALL	os∕signal·Relay(SB)
+	CALL	·sigsend(SB)
 	ADD	$8, R13, R13
 
 	// the IRQ handling goroutine is expected to unmask IRQs

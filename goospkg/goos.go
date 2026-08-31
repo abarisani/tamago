@@ -74,11 +74,22 @@ func WriteConsole(c byte)
 // runtime setup (post World start).
 func InitHW1()
 
+// SendSignal delivers a signal to be handled through [signal.Notify]. Its
+// implementation is linked from the Go runtime, rather than GOOSPKG, and is
+// provided to be called from exception handlers written in Go assembly.
+func SendSignal(s int)
+
+// SignalReady returns whether package [signal] is blocked waiting for an
+// incoming signal or it is handling one through [signal.Notify]. Its
+// implementation is linked from the Go runtime and not GOOSPKG.
+func SignalReady() bool
+
 // Optional variables/functions.
 var (
 	// Bloc is an optional variable which can be set to redefine the heap
 	// memory start address, this is typically only required on OS
-	// supported environments.
+	// supported environments. When used it must be set with a static
+	// initializer before package initialization.
 	Bloc uintptr
 
 	// Exit is an optional function which can be set to override default
@@ -90,7 +101,8 @@ var (
 	Idle func(until int64)
 
 	// ProcID is an optional function which can be set to provide the
-	// processor identifier for tracing purposes.
+	// processor identifier for tracing purposes. When used it must be set
+	// with a static initializer before package initialization.
 	ProcID func() uint64
 
 	// Task is an optional function which can be set to provide an
