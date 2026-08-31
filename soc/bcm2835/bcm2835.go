@@ -37,7 +37,7 @@ var ARM = &arm.CPU{
 	TimerMultiplier: 1,
 }
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/mem.RamStackOffset
 var ramStackOffset uintptr = 0x100000 // 1 MB
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime

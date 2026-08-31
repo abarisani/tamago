@@ -72,9 +72,9 @@ vecloop:
 	BL	clearBSS(SB)
 
 	// set stack pointer
-	MOVW	github·com∕usbarmory∕tamago∕goospkg·RamStart(SB), R13
-	MOVW	github·com∕usbarmory∕tamago∕goospkg·RamSize(SB), R1
-	MOVW	github·com∕usbarmory∕tamago∕goospkg·RamStackOffset(SB), R2
+	MOVW	github·com∕usbarmory∕tamago∕mem·RamStart(SB), R13
+	MOVW	github·com∕usbarmory∕tamago∕mem·RamSize(SB), R1
+	MOVW	github·com∕usbarmory∕tamago∕mem·RamStackOffset(SB), R2
 	ADD	R1, R13
 	SUB	R2, R13
 	MOVW	R13, R3

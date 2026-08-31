@@ -12,5 +12,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/mem.RamStackOffset
 var ramStackOffset uintptr = 0x100

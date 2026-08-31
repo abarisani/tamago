@@ -19,5 +19,5 @@ import (
 // This is useful when large DMA descriptors are required to re-initialize
 // tamago `dma` package in external RAM.
 
-//go:linkname ramSize github.com/usbarmory/tamago/goospkg.RamSize
+//go:linkname ramSize github.com/usbarmory/tamago/mem.RamSize
 var ramSize uintptr = 0x40000000 // 1GB

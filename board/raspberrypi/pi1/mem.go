@@ -25,5 +25,5 @@ import (
 // - model B  (after 15th October 2012)
 // - model B+ (all)
 
-//go:linkname ramSize github.com/usbarmory/tamago/goospkg.RamSize
+//go:linkname ramSize github.com/usbarmory/tamago/mem.RamSize
 var ramSize uintptr = 0x20000000 - 0x04000000 // 512MB - 64MB GPU (VideoCore)

@@ -12,5 +12,5 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStart github.com/usbarmory/tamago/goospkg.RamStart
+//go:linkname ramStart github.com/usbarmory/tamago/mem.RamStart
 var ramStart uintptr = 0x00000000

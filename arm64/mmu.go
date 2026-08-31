@@ -13,6 +13,7 @@ import (
 
 	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
+	"github.com/usbarmory/tamago/mem"
 )
 
 const (
@@ -53,7 +54,7 @@ func alignUp(addr uintptr, align uintptr) uintptr {
 }
 
 func (m *mmuMap) init() {
-	ramStart, ramEnd := goos.MemRegion()
+	ramStart, ramEnd := mem.Region()
 	textStart, textEnd := runtime.TextRegion()
 
 	if ramStart&(pageTableSize-1) != 0 || ramEnd&(pageTableSize-1) != 0 {

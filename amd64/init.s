@@ -161,9 +161,9 @@ add_ext_entries:
 	MOVL	DI, CR3
 
 	// set stack pointer
-	MOVQ	github·com∕usbarmory∕tamago∕goospkg·RamStart(SB), SP
-	MOVQ	github·com∕usbarmory∕tamago∕goospkg·RamSize(SB), AX
-	MOVQ	github·com∕usbarmory∕tamago∕goospkg·RamStackOffset(SB), BX
+	MOVQ	github·com∕usbarmory∕tamago∕mem·RamStart(SB), SP
+	MOVQ	github·com∕usbarmory∕tamago∕mem·RamSize(SB), AX
+	MOVQ	github·com∕usbarmory∕tamago∕mem·RamStackOffset(SB), BX
 	ADDQ	AX, SP
 	SUBQ	BX, SP
 

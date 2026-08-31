@@ -103,26 +103,3 @@ var (
 	// processor.
 	Wake func(procid uint64)
 )
-
-// The following variables are specific to this overlay.
-var (
-	// RamStart defines the start address of the physical or virtual memory
-	// available to the runtime for allocation (including the code segment
-	// which must be mapped within).
-	RamStart uintptr
-
-	// RamSize defines the total size of the physical or virtual memory
-	// available to the runtime for allocation (including the code segment
-	// which must be mapped within).
-	RamSize uintptr
-
-	// RamStackOffset, defines the negative offset from the end of the
-	// available memory for stack allocation.
-	RamStackOffset uintptr
-)
-
-// MemRegion returns the start and end addresses of the physical RAM assigned
-// to the Go runtime.
-func MemRegion() (start uintptr, end uintptr) {
-	return RamStart, RamStart + RamSize
-}

@@ -21,5 +21,5 @@ import (
 
 // The standard USB armory Mk II features a single 512MB DDR3 RAM module.
 
-//go:linkname ramSize github.com/usbarmory/tamago/goospkg.RamSize
+//go:linkname ramSize github.com/usbarmory/tamago/mem.RamSize
 var ramSize uintptr = 0x20000000 // 512MB

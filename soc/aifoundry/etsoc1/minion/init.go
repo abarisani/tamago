@@ -15,7 +15,7 @@ import (
 	"github.com/usbarmory/tamago/soc/aifoundry/etsoc1"
 )
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/mem.RamStackOffset
 var ramStackOffset uintptr = 0x10000 // give room to tasks stack (see smp.go)
 
 // Init takes care of the lower level initialization triggered early in runtime

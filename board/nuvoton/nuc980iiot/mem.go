@@ -16,5 +16,5 @@ import (
 
 // The NuMaker-IIoT-NUC980G2 features 120MB DDR2 SDRAM.
 
-//go:linkname ramSize github.com/usbarmory/tamago/goospkg.RamSize
+//go:linkname ramSize github.com/usbarmory/tamago/mem.RamSize
 var ramSize uintptr = 0x08000000 // 128 MB

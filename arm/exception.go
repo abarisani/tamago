@@ -14,6 +14,7 @@ import (
 	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/exception"
 	"github.com/usbarmory/tamago/internal/reg"
+	"github.com/usbarmory/tamago/mem"
 )
 
 // ARM exception vector offsets
@@ -152,7 +153,7 @@ func (cpu *CPU) SetVectorTable(t VectorTable) {
 //go:nosplit
 func (cpu *CPU) initVectorTable() {
 	// 32-bytes alignment is required
-	cpu.vbar = uint32(goos.RamStart)
+	cpu.vbar = uint32(mem.RamStart)
 
 	// the application is allowed to override the reserved area
 	if vecTableStart != 0 {

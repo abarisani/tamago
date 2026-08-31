@@ -12,7 +12,7 @@ import (
 	_ "unsafe"
 )
 
-//go:linkname ramStackOffset github.com/usbarmory/tamago/goospkg.RamStackOffset
+//go:linkname ramStackOffset github.com/usbarmory/tamago/mem.RamStackOffset
 var ramStackOffset uintptr = 0x100
 
 // Init takes care of the lower level initialization triggered early in runtime

@@ -12,8 +12,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
+	"github.com/usbarmory/tamago/mem"
 	"github.com/usbarmory/tamago/soc/aifoundry/etsoc1"
 )
 
@@ -26,7 +26,7 @@ var (
 	ncpu int
 
 	// AP task address base, accounting for [alignExceptionHandler]
-	taskBase      = goos.RamStart + 4*2
+	taskBase      = mem.RamStart + 4*2
 	taskStackSize = uint64(ramStackOffset) / uint64(MaxTasks)
 )
 
@@ -58,7 +58,7 @@ type task struct {
 
 func schedule(hart int, gp uint64, pc uint64, wait bool) {
 	// use [ramEnd-ramStackOffset:ramEnd] for tasks stack
-	stk := goos.RamStart + goos.RamSize
+	stk := mem.RamStart + mem.RamSize
 	sp := uint64(stk) - uint64(hart)*(uint64(ramStackOffset)/uint64(MaxTasks))
 
 	// write directly to memory to avoid &task allocation
