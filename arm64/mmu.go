@@ -11,7 +11,6 @@ package arm64
 import (
 	"runtime"
 
-	"github.com/usbarmory/tamago/goospkg"
 	"github.com/usbarmory/tamago/internal/reg"
 	"github.com/usbarmory/tamago/mem"
 )

@@ -23,7 +23,7 @@ func Init() {
 	// instructions to require 8-byte alignment.
 	//
 	// To prevent faults, MMU initialization is done as soon as possible in
-	// hwinit0, rather than in hwinit1.
+	// InitHW0, rather than in InitHW1.
 	cpu := &CPU{}
 	cpu.InitMMU()
 }
