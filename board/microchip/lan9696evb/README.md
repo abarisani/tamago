@@ -102,7 +102,7 @@ Go applications can be compiled as usual, using the compiler built in the
 previous step, but with the addition of the following flags/variables:
 
 ```sh
-GOOS=tamago GOOSPKG=github.com/usbarmory/tamago GOARCH=arm64 \
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=arm64 \
 	${TAMAGO} build -ldflags "-T 0x60010000 -R 0x1000" main.go
 ```
 

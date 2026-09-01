@@ -18,7 +18,7 @@ import (
 	_ "unsafe"
 
 	"github.com/usbarmory/tamago/arm"
-	"github.com/usbarmory/tamago/goospkg"
+	"github.com/usbarmory/tamago/goos"
 	"github.com/usbarmory/tamago/internal/reg"
 )
 

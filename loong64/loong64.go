@@ -21,7 +21,7 @@ import (
 	"math"
 	"sync"
 
-	"github.com/usbarmory/tamago/goospkg"
+	"github.com/usbarmory/tamago/goos"
 )
 
 // CPU instance

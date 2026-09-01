@@ -64,7 +64,7 @@ supply a time source based on the RISC-V `time` CSR.
 # Set up TamaGo compiler
 export TAMAGO=/path/to/tamago-go/bin/go
 
-GOOS=tamago GOARCH=riscv64 GOOSPKG=github.com/usbarmory/tamago ${TAMAGO} build \
+GOOS=tamago GOARCH=riscv64 GOOSPKG=github.com/usbarmory/tamago/goos ${TAMAGO} build \
     -tags linknanotime \
     -ldflags "-T 0x41010000 -R 0x1000" \
     -o example \

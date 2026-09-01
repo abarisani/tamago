@@ -83,7 +83,7 @@ Go applications can be compiled as usual, using the compiler built in the
 previous step, but with the addition of the following flags/variables:
 
 ```sh
-GOOS=tamago GOOSPKG=github.com/usbarmory/tamago GOARCH=riscv64 GOSOFT=1 \
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=riscv64 GOSOFT=1 \
 	${TAMAGO} build -ldflags "-T 0x40010000 -R 0x1000" main.go
 ```
 

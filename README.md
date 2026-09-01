@@ -199,7 +199,7 @@ While compiling, the `GOOSPKG` Go environment variable must be set to enable
 this library as overlay to support `GOOS=tamago`.
 
 ```
-export GOOSPKG=github.com/usbarmory/tamago
+export GOOSPKG=github.com/usbarmory/tamago/goos
 ```
 
 Go applications are required to import the relevant board package to ensure
@@ -216,8 +216,8 @@ Go applications can be compiled with the compiler built in the previous step,
 with the addition of a few flags/variables:
 
 ```sh
-# set this library as `internal/runtime/goospkg` overlay
-export GOOSPKG=github.com/usbarmory/tamago
+# set this package as `internal/runtime/goospkg` overlay
+export GOOSPKG=github.com/usbarmory/tamago/goos
 
 # Example for Cloud Hypervisory, QEMU and Firecracker KVMs
 GOOS=tamago GOARCH=amd64 ${TAMAGO} build -ldflags "-T 0x10010000 -R 0x1000" main.go
@@ -301,7 +301,7 @@ Additional resources
 ====================
 
 * [Package API](https://pkg.go.dev/github.com/usbarmory/tamago)
-* [Runtime API](https://pkg.go.dev/github.com/usbarmory/tamago/goospkg)
+* [Runtime API](https://pkg.go.dev/github.com/usbarmory/tamago/goos)
 * [Compatibility](https://github.com/usbarmory/tamago/wiki/Compatibility)
 * [Internals](https://github.com/usbarmory/tamago/wiki/Internals)
 * [FAQ](https://github.com/usbarmory/tamago/wiki/Frequently-Asked-Questions-(FAQ))

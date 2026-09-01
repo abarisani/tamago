@@ -16,7 +16,7 @@ package linux_user
 import (
 	_ "unsafe"
 
-	"github.com/usbarmory/tamago/goospkg"
+	"github.com/usbarmory/tamago/goos"
 )
 
 const (

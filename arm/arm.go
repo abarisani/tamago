@@ -21,7 +21,7 @@ package arm
 import (
 	"math"
 
-	goos "github.com/usbarmory/tamago/goospkg"
+	goos "github.com/usbarmory/tamago/goos"
 )
 
 // ARM processor modes

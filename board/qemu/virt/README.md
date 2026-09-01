@@ -63,7 +63,7 @@ Go applications can be compiled as usual, using the compiler built for the
 TamaGo framework, but with the addition of the following flags/variables:
 
 ```sh
-GOOS=tamago GOOSPKG=github.com/usbarmory/tamago GOARCH=loong64 \
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=loong64 \
 	${TAMAGO} build -ldflags "-T 0x1000000 -R 0x1000" main.go
 ```
 

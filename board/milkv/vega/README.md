@@ -91,7 +91,7 @@ import (
 The image is linked to run from DRAM (text segment at DRAM base + 64 KB):
 
 ```sh
-GOOS=tamago GOOSPKG=github.com/usbarmory/tamago GOARCH=riscv64 \
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=riscv64 \
 	${TAMAGO} build -ldflags "-T 0x41010000 -R 0x1000" main.go
 ```
 

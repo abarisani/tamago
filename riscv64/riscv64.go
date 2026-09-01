@@ -21,7 +21,7 @@ import (
 	"math"
 	"sync"
 
-	"github.com/usbarmory/tamago/goospkg"
+	"github.com/usbarmory/tamago/goos"
 )
 
 // This package supports 64-bit cores.

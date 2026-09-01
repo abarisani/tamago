@@ -11,7 +11,7 @@ package arm64
 import (
 	"unsafe"
 
-	"github.com/usbarmory/tamago/goospkg"
+	"github.com/usbarmory/tamago/goos"
 	"github.com/usbarmory/tamago/internal/exception"
 	"github.com/usbarmory/tamago/internal/reg"
 	"github.com/usbarmory/tamago/mem"

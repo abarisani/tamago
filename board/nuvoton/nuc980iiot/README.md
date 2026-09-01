@@ -99,7 +99,7 @@ Applications are compiled with `GOARM=5` and the `linkcpuinit` tag, which
 installs the board reset vector required to boot from the Nuvoton boot ROM:
 
 ```sh
-GOOS=tamago GOOSPKG=github.com/usbarmory/tamago GOARM=5 GOARCH=arm \
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARM=5 GOARCH=arm \
 	${TAMAGO} build -tags linkcpuinit -ldflags "-T 0x00010000 -R 0x1000" main.go
 ```
 

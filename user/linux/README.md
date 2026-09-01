@@ -72,7 +72,7 @@ can be executed as follows:
 
 ```sh
 # GOOSPKG can be omitted to use Go compiler default overlay
-GOOS=tamago GOOSPKG=github.com/usbarmory/tamago GOARCH=amd64 \
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=amd64 \
 	$TAMAGO run test.go
 ** I can't get out! ;-( ** dial tcp 8.8.8.8:53: net.SocketFunc is nil
 ** I can't get out! ;-( ** open /etc/passwd: No such file or directory
