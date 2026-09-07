@@ -62,10 +62,6 @@ func DefaultExceptionHandler() {
 // SystemExceptionHandler allows to override the default exception handler.
 var SystemExceptionHandler = DefaultExceptionHandler
 
-func systemException() {
-	SystemExceptionHandler()
-}
-
 // SetExceptionHandler updates the CPU exception entry with the address of the
 // argument function.
 func (cpu *CPU) SetExceptionHandler(fn ExceptionHandler) {

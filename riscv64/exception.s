@@ -49,4 +49,7 @@ TEXT ·trapHandler(SB),NOSPLIT|NOFRAME,$0
 	BLT	ZERO, T0, fault
 	JMP	·handleInterrupt(SB)
 fault:
-	JMP	·systemException(SB)
+	MOV	$·SystemExceptionHandler(SB), T0
+	MOV	(T0), T0
+	MOV	T0, 8(SP)
+	CALL	internal∕runtime∕goospkg·SystemStack(SB)

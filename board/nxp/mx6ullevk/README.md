@@ -103,7 +103,7 @@ previous step, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARM=7 GOARCH=arm \
-	${TAMAGO} build -ldflags "-T 0x80010000 -R 0x1000" main.go
+	${TAMAGO} build -ldflags "-T 0x80010000" main.go
 ```
 
 An example application, targeting the MCIMX6ULL-EVK platform,

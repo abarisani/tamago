@@ -54,7 +54,7 @@ TEXT ·set_mvbar(SB),NOSPLIT,$0-4
 	MCR	15, 0, R0, C12, C0, 1
 	RET
 
-#define EXCEPTION(OFFSET, FN, LROFFSET)				\
+#define EXCEPTION(OFFSET, LROFFSET)				\
 	/* save exception vector */				\
 	MOVW	$OFFSET, R0					\
 	MOVW	R0, ·offset(SB)					\
@@ -65,27 +65,28 @@ TEXT ·set_mvbar(SB),NOSPLIT,$0-4
 	MOVW	R14, ·eip(SB)					\
 								\
 	/* call exception handler on system stack (g0) */	\
-	MOVW	FN(SB), R0					\
+	MOVW	$·SystemExceptionHandler(SB), R0		\
+	MOVW	(R0), R0					\
 	MOVW	R0, 4(R13)					\
-	CALL	runtime·CallOnG0(SB)
+	CALL	internal∕runtime∕goospkg·SystemStack(SB)
 
 TEXT ·resetHandler(SB),NOSPLIT|NOFRAME,$0
-	EXCEPTION(const_RESET, ·SystemExceptionHandler, 0)
+	EXCEPTION(const_RESET, 0)
 
 TEXT ·undefinedHandler(SB),NOSPLIT|NOFRAME,$0
-	EXCEPTION(const_UNDEFINED, ·SystemExceptionHandler, 4)
+	EXCEPTION(const_UNDEFINED, 4)
 
 TEXT ·supervisorHandler(SB),NOSPLIT|NOFRAME,$0
-	EXCEPTION(const_SUPERVISOR, ·SystemExceptionHandler, 0)
+	EXCEPTION(const_SUPERVISOR, 0)
 
 TEXT ·prefetchAbortHandler(SB),NOSPLIT|NOFRAME,$0
-	EXCEPTION(const_PREFETCH_ABORT, ·SystemExceptionHandler, 4)
+	EXCEPTION(const_PREFETCH_ABORT, 4)
 
 TEXT ·dataAbortHandler(SB),NOSPLIT|NOFRAME,$0
-	EXCEPTION(const_DATA_ABORT, ·SystemExceptionHandler, 8)
+	EXCEPTION(const_DATA_ABORT, 8)
 
 TEXT ·fiqHandler(SB),NOSPLIT|NOFRAME,$0
-	EXCEPTION(const_FIQ, ·SystemExceptionHandler, 4)
+	EXCEPTION(const_FIQ, 4)
 
 TEXT ·nullHandler(SB),NOSPLIT|NOFRAME,$0
 	MOVW.S	R14, R15

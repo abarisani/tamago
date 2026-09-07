@@ -9,8 +9,6 @@
 package arm
 
 import (
-	"runtime"
-
 	"github.com/usbarmory/tamago/internal/reg"
 	"github.com/usbarmory/tamago/mem"
 )
@@ -59,7 +57,7 @@ func set_ttbr0(addr uint32)
 
 func regions() (ramStart, ramEnd, textEnd uint32) {
 	mStart, mEnd := mem.Region()
-	_, tEnd := runtime.TextRegion()
+	_, tEnd := mem.Text()
 
 	return uint32(mStart), uint32(mEnd), uint32(tEnd)
 }
@@ -128,7 +126,7 @@ func (cpu *CPU) initL2Table(entry int, base uint32, section uint32) {
 // must use ConfigureMMU to reconfigure as required.
 //
 // All available memory is marked as non-executable except for the range
-// returned by runtime.TextRegion().
+// returned by mem.Text().
 func (cpu *CPU) InitMMU() {
 	l1pageTableStart := cpu.vbar + l1pageTableOffset
 	l2pageTableStart := cpu.vbar + l2pageTableOffset

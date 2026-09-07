@@ -116,11 +116,10 @@ TEXT ·handleInterrupt(SB),NOSPLIT|NOFRAME,$0
 	MOVB	$1, ·irqHandling(SB)
 	MOVB	$1, ·irqLock(SB)
 
-	SUBQ	$8, SP
 	MOVQ	$(const_IRQ_SIGNAL), AX
-	MOVQ	AX, (SP)
+	PUSHQ	AX
 	CALL	internal∕runtime∕goospkg·SendSignal(SB)
-	ADDQ	$8, SP
+	POPQ	AX
 
 	// wake idle APs
 	MOVL	$(const_LAPIC_ICRL), AX

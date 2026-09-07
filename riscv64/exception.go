@@ -77,10 +77,6 @@ func DefaultSupervisorExceptionHandler() {
 // SystemExceptionHandler allows to override the default exception handler.
 var SystemExceptionHandler = DefaultExceptionHandler
 
-func systemException() {
-	SystemExceptionHandler()
-}
-
 // SetExceptionHandler updates the CPU machine trap vector with the address of
 // the argument function.
 func (cpu *CPU) SetExceptionHandler(fn ExceptionHandler) {

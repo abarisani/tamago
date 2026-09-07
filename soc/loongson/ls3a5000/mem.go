@@ -13,4 +13,4 @@ import (
 )
 
 //go:linkname ramStart github.com/usbarmory/tamago/mem.RamStart
-var ramStart uintptr = 0x00000000
+var ramStart uintptr = 0x01000000

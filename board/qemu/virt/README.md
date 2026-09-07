@@ -64,7 +64,7 @@ TamaGo framework, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=loong64 \
-	${TAMAGO} build -ldflags "-T 0x1000000 -R 0x1000" main.go
+	${TAMAGO} build -ldflags "-T 0x1000000" main.go
 ```
 
 The QEMU `virt` machine reserves the low 2 MiB of RAM for boot information and

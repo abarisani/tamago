@@ -103,7 +103,7 @@ previous step, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=arm64 \
-	${TAMAGO} build -ldflags "-T 0x60010000 -R 0x1000" main.go
+	${TAMAGO} build -ldflags "-T 0x60010000" main.go
 ```
 
 The [go-net](https://github.com/usbarmory/go-net) package provides drivers for

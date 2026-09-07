@@ -22,10 +22,11 @@ TEXT ·trapHandler(SB),NOSPLIT|NOFRAME,$0
 	// interrupt
 	WORD	$0x0400c004		// csrrd R4, SAVE0 (restore R4)
 	JMP	·handleInterrupt(SB)
-
 exception:
-	WORD	$0x0400c004		// csrrd R4, SAVE0 (restore R4)
-	JMP	·systemException(SB)
+	MOVV	$·SystemExceptionHandler(SB), R1
+	MOVV	(R1), R1
+	MOVV	R1, 8(R3)
+	JMP	internal∕runtime∕goospkg·SystemStack(SB)
 
 // handleInterrupt relays the interrupt to the os/signal subsystem and returns
 // to the interrupted context with interrupts left masked (PRMD.PIE cleared), so

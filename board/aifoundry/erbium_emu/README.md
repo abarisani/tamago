@@ -84,7 +84,7 @@ previous step, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=riscv64 GOSOFT=1 \
-	${TAMAGO} build -ldflags "-T 0x40010000 -R 0x1000" main.go
+	${TAMAGO} build -ldflags "-T 0x40010000" main.go
 ```
 
 An example application, targeting AI Foundry erbium_emu,

@@ -92,7 +92,7 @@ The image is linked to run from DRAM (text segment at DRAM base + 64 KB):
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=riscv64 \
-	${TAMAGO} build -ldflags "-T 0x41010000 -R 0x1000" main.go
+	${TAMAGO} build -ldflags "-T 0x41010000" main.go
 ```
 
 The ELF entry point differs from the `-T` text base; extract it for the loader:

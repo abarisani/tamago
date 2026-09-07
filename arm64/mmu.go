@@ -9,8 +9,6 @@
 package arm64
 
 import (
-	"runtime"
-
 	"github.com/usbarmory/tamago/internal/reg"
 	"github.com/usbarmory/tamago/mem"
 )
@@ -54,7 +52,7 @@ func alignUp(addr uintptr, align uintptr) uintptr {
 
 func (m *mmuMap) init() {
 	ramStart, ramEnd := mem.Region()
-	textStart, textEnd := runtime.TextRegion()
+	textStart, textEnd := mem.Text()
 
 	if ramStart&(pageTableSize-1) != 0 || ramEnd&(pageTableSize-1) != 0 {
 		panic("RAM region not 4KB aligned")
@@ -288,7 +286,7 @@ func (m *mmuMap) initL3Table(entry int, base uint64, section uint64) {
 // trap null pointers.
 //
 // All available memory is marked as non-executable except for the range
-// returned by runtime.TextRegion().
+// returned by mem.Text().
 func (cpu *CPU) InitMMU() {
 	m := &mmuMap{}
 	m.init()

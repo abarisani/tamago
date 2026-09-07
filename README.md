@@ -220,22 +220,22 @@ with the addition of a few flags/variables:
 export GOOSPKG=github.com/usbarmory/tamago/goos
 
 # Example for Cloud Hypervisory, QEMU and Firecracker KVMs
-GOOS=tamago GOARCH=amd64 ${TAMAGO} build -ldflags "-T 0x10010000 -R 0x1000" main.go
+GOOS=tamago GOARCH=amd64 ${TAMAGO} build -ldflags "-T 0x10010000" main.go
 
 # Example for NXP i.MX6UL
-GOOS=tamago GOARM=7 GOARCH=arm ${TAMAGO} build -ldflags "-T 0x80010000 -R 0x1000" main.go
+GOOS=tamago GOARM=7 GOARCH=arm ${TAMAGO} build -ldflags "-T 0x80010000" main.go
 
 # Example for NXP 8MPLUSLPD4-EVK
-GOOS=tamago GOARCH=arm64 ${TAMAGO} build -ldflags "-T 0x40010000 -R 0x1000" main.go
+GOOS=tamago GOARCH=arm64 ${TAMAGO} build -ldflags "-T 0x40010000" main.go
 
 # Example for SiFive FU540
-GOOS=tamago GOARCH=riscv64 ${TAMAGO} build -ldflags "-T 0x80010000 -R 0x1000" main.go
+GOOS=tamago GOARCH=riscv64 ${TAMAGO} build -ldflags "-T 0x80010000" main.go
 
 # Example for AI Foundry Erbium
-GOOS=tamago GOARCH=riscv64 GOSOFT=1 ${TAMAGO} build -ldflags "-T 0x40010000 -R 0x1000" main.go
+GOOS=tamago GOARCH=riscv64 GOSOFT=1 ${TAMAGO} build -ldflags "-T 0x40010000" main.go
 
 # Example for QEMU LoongArch virt
-GOOS=tamago GOARCH=loong64 ${TAMAGO} build -ldflags "-T 0x1000000 -R 0x1000" main.go
+GOOS=tamago GOARCH=loong64 ${TAMAGO} build -ldflags "-T 0x1000000" main.go
 
 # Example for Linux userspace
 GOOS=tamago ${TAMAGO} build main.go

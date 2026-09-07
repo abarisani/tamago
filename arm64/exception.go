@@ -25,6 +25,7 @@ const (
 // defined in exception.s
 func set_vbar(addr uint64)
 func read_el() uint64
+func read_elr() uintptr
 func handleException()
 func handleInterrupt()
 
@@ -38,7 +39,7 @@ var isThrowing bool
 
 // DefaultExceptionHandler handles an exception by printing its vector and
 // processor mode before panicking.
-func DefaultExceptionHandler(pc uintptr) {
+func DefaultExceptionHandler() {
 	if isThrowing {
 		goos.Exit(1)
 	}
@@ -46,15 +47,11 @@ func DefaultExceptionHandler(pc uintptr) {
 	isThrowing = true
 
 	print("EL", int(read_el()&0b1100)>>2, " exception\n")
-	exception.Throw(pc)
+	exception.Throw(read_elr())
 }
 
 // SystemExceptionHandler allows to override the default exception handler.
 var SystemExceptionHandler = DefaultExceptionHandler
-
-func systemException(pc uintptr) {
-	SystemExceptionHandler(pc)
-}
 
 func addJump(addr uint64, fn exceptionHandler) {
 	reg.Write64(addr, vecTableLoad)

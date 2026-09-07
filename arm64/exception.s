@@ -9,9 +9,10 @@
 #include "textflag.h"
 
 TEXT ·handleException(SB),NOSPLIT|NOFRAME,$0
-	MRS	ELR_EL1, R0
-	MOVD	R0, 8(RSP)	// arg
-	JMP	·systemException(SB)
+	MOVD	$·SystemExceptionHandler(SB), R0
+	MOVD	(R0), R0
+	MOVD	R0, 8(RSP)
+	CALL	internal∕runtime∕goospkg·SystemStack(SB)
 
 // func set_vbar(addr uint64)
 TEXT ·set_vbar(SB),NOSPLIT,$0
@@ -22,5 +23,11 @@ TEXT ·set_vbar(SB),NOSPLIT,$0
 // func read_el() uint64
 TEXT ·read_el(SB),$0-8
 	MRS	CurrentEL, R0
+	MOVD	R0, ret+0(FP)
+	RET
+
+// func read_elr() uintptr
+TEXT ·read_elr(SB),$0-8
+	MRS	ELR_EL1, R0
 	MOVD	R0, ret+0(FP)
 	RET
