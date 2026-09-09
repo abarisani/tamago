@@ -48,9 +48,8 @@ func TestAEAD(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	b := &GHCB{
-		SeqNo: 1,
-	}
+	b := &GHCB{}
+	seqNo = 1
 
 	hdr := &MessageHeader{
 		Algo:           AES_256_GCM,
