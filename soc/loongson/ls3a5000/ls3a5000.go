@@ -22,6 +22,7 @@ import (
 
 // Peripheral registers
 const (
+	// Serial ports
 	UART0_BASE = 0x1fe001e0
 )
 

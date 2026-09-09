@@ -19,7 +19,6 @@ package amd64
 
 import (
 	"math"
-	"runtime"
 	_ "unsafe"
 
 	"github.com/usbarmory/tamago/amd64/lapic"
@@ -105,11 +104,6 @@ func (cpu *CPU) Init() {
 	reg.Write64(taskAddress+0x00, 0)
 	reg.Write64(taskAddress+0x08, 0)
 	reg.Write64(taskAddress+0x10, 0)
-}
-
-// Name returns the CPU identifier.
-func (cpu *CPU) Name() string {
-	return runtime.CPU()
 }
 
 // Reset resets the CPU pin via 8042 keyboard controller pulse.

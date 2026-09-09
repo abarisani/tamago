@@ -46,9 +46,9 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU              | Board                                                                | CPU package                                                    | Board package                                                                                    |
-|------------------|----------------------------------------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| AMD/Intel 64-bit | [Firecracker microvm](https://firecracker-microvm.github.io)         | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [firecracker/microvm](https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm) |
+| CPU              | Board                                                        | CPU package                                                    | Board package                                                                                    |
+|------------------|--------------------------------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| AMD/Intel 64-bit | [Firecracker microvm](https://firecracker-microvm.github.io) | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [firecracker/microvm](https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm) |
 
 Compiling
 =========
@@ -106,7 +106,7 @@ previous step, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=amd64 \
-	${TAMAGO} build -ldflags "-T 0x10010000" main.go
+	${TAMAGO} build main.go
 ```
 
 An example application, targeting the Firecracker microvm platform,

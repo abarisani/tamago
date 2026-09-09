@@ -27,6 +27,9 @@ func EarlyClockInit()
 
 // System registers (Global Control Register block).
 const (
+	// SDRAM start address
+	SDRAM_BASE = 0x00000000
+
 	// SYS_BA is the System Manager / Global Control register base.
 	SYS_BA = 0xb0000000
 

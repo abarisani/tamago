@@ -29,6 +29,9 @@ import (
 
 // Peripheral registers
 const (
+	// MRAM start address
+	MRAM_BASE = 0x40000000
+
 	// System register
 	SYSREG_BASE = 0x02000000
 

@@ -212,37 +212,17 @@ import (
 )
 ```
 
-Go applications can be compiled with the compiler built in the previous step,
-with the addition of a few flags/variables:
+Go applications can be compiled with the compiler built in the previous step as
+follows:
 
 ```sh
-# set this package as `internal/runtime/goospkg` overlay
-export GOOSPKG=github.com/usbarmory/tamago/goos
-
-# Example for Cloud Hypervisory, QEMU and Firecracker KVMs
-GOOS=tamago GOARCH=amd64 ${TAMAGO} build -ldflags "-T 0x10010000" main.go
-
-# Example for NXP i.MX6UL
-GOOS=tamago GOARM=7 GOARCH=arm ${TAMAGO} build -ldflags "-T 0x80010000" main.go
-
-# Example for NXP 8MPLUSLPD4-EVK
-GOOS=tamago GOARCH=arm64 ${TAMAGO} build -ldflags "-T 0x40010000" main.go
-
-# Example for SiFive FU540
-GOOS=tamago GOARCH=riscv64 ${TAMAGO} build -ldflags "-T 0x80010000" main.go
-
-# Example for AI Foundry Erbium
-GOOS=tamago GOARCH=riscv64 GOSOFT=1 ${TAMAGO} build -ldflags "-T 0x40010000" main.go
-
-# Example for QEMU LoongArch virt
-GOOS=tamago GOARCH=loong64 ${TAMAGO} build -ldflags "-T 0x1000000" main.go
-
-# Example for Linux userspace
-GOOS=tamago ${TAMAGO} build main.go
+# When cross-compiling GOARCH must also be set to the relevant architecture
+# (amd64,arm,arm64,loong64,riscv64).
+GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos ${TAMAGO} build main.go
 ```
 
-See the respective board package README file for compilation information for
-each specific target.
+See the respective board package README file for compilation and loading
+instructions for each specific target.
 
 Build tags
 ==========

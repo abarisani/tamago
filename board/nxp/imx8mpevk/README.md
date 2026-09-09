@@ -106,7 +106,7 @@ previous step, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=arm64 \
-	${TAMAGO} build -ldflags "-T 0x40010000" main.go
+	${TAMAGO} build main.go
 ```
 
 An example application, targeting the 8MPLUSLPD4-EVK platform,

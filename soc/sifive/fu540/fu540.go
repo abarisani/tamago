@@ -31,6 +31,9 @@ const (
 	// Core-Local Interruptor
 	CLINT_BASE = 0x02000000
 
+	// External DRAM start address
+	DDR_BASE = 0x80000000
+
 	// Serial ports
 	UART0_BASE = 0x10010000
 	UART1_BASE = 0x10011000

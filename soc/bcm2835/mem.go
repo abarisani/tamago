@@ -16,3 +16,6 @@ import (
 
 //go:linkname ramStart github.com/usbarmory/tamago/mem.RamStart
 var ramStart uintptr = 0x00100000
+
+//go:linkname textStart internal/runtime/goospkg.TextAddr
+var textStart uintptr = 0x00110000

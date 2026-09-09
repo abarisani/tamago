@@ -56,7 +56,8 @@ Go distribution supporting `GOOS=tamago`
 
 The [tamago](https://github.com/usbarmory/tamago/tree/latest/cmd/tamago)
 command downloads, compiles, and runs the `go` command from the
-[TamaGo distribution](https://github.com/usbarmory/tamago-go) matching the                                                                                                                                          tamago module version from the application `go.mod`.
+[TamaGo distribution](https://github.com/usbarmory/tamago-go) matching the
+tamago module version from the application `go.mod`.
 
 Applications can add `github.com/usbarmory/tamago` to `go.mod`, and then
 replace the `go` command with:
@@ -103,7 +104,7 @@ previous step, but with the addition of the following flags/variables:
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=arm64 \
-	${TAMAGO} build -ldflags "-T 0x60010000" main.go
+	${TAMAGO} build main.go
 ```
 
 The [go-net](https://github.com/usbarmory/go-net) package provides drivers for

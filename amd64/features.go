@@ -140,6 +140,51 @@ func (cpu *CPU) Features() *Features {
 	return &cpu.features
 }
 
+func appendBytes(b []byte, args ...uint32) []byte {
+	for _, arg := range args {
+		b = append(b,
+			byte((arg >> 0)),
+			byte((arg >> 8)),
+			byte((arg >> 16)),
+			byte((arg >> 24)))
+	}
+	return b
+}
+
+// Name returns the CPU identifier.
+func (cpu *CPU) Name() string {
+	maxExtendedFunctionInformation, _, _, _ := cpuid(0x80000000, 0)
+
+	if maxExtendedFunctionInformation < 0x80000004 {
+		return ""
+	}
+
+	var eax, ebx, ecx, edx uint32
+	data := make([]byte, 0, 3*4*4)
+
+	eax, ebx, ecx, edx = cpuid(0x80000002, 0)
+	data = appendBytes(data, eax, ebx, ecx, edx)
+
+	eax, ebx, ecx, edx = cpuid(0x80000003, 0)
+	data = appendBytes(data, eax, ebx, ecx, edx)
+
+	eax, ebx, ecx, edx = cpuid(0x80000004, 0)
+	data = appendBytes(data, eax, ebx, ecx, edx)
+
+	for len(data) > 0 && data[0] == ' ' {
+		data = data[1:]
+	}
+
+	for i, c := range data {
+		if c == '\x00' {
+			data = data[:i]
+			break
+		}
+	}
+
+	return string(data)
+}
+
 // NumCPU returns the number of logical CPUs available on the platform.
 func NumCPU() (n int) {
 	_, _, ecx, _ := cpuid(CPUID_VENDOR, 0)

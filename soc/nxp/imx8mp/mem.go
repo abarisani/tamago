@@ -16,3 +16,6 @@ import (
 
 //go:linkname ramStart github.com/usbarmory/tamago/mem.RamStart
 var ramStart uintptr = DDR_BASE
+
+//go:linkname textStart internal/runtime/goospkg.TextAddr
+var textStart uintptr = DDR_BASE + 0x10000

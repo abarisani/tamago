@@ -18,3 +18,6 @@ import (
 
 //go:linkname ramStart github.com/usbarmory/tamago/mem.RamStart
 var ramStart uintptr = etsoc1.DRAM_BASE
+
+//go:linkname textStart internal/runtime/goospkg.TextAddr
+var textStart uintptr = etsoc1.DRAM_BASE + 0x10000

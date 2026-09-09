@@ -66,13 +66,11 @@ export TAMAGO=/path/to/tamago-go/bin/go
 
 GOOS=tamago GOARCH=riscv64 GOOSPKG=github.com/usbarmory/tamago/goos ${TAMAGO} build \
     -tags linknanotime \
-    -ldflags "-T 0x41010000" \
     -o example \
     main.go
 ```
 
-Always extract the ELF entry point and use it as the emulator jump target, as
-it differs from the `-T` text segment base:
+Always extract the ELF entry point and use it as the emulator jump target:
 
 ```bash
 ENTRY=$(riscv64-linux-gnu-readelf -h example | awk '/Entry point/{print $4}')
@@ -112,7 +110,7 @@ qemu-system-riscv64 \
 ```
 
 RAM is limited to 200 MB to avoid overlap with the emulator internal address
-decoding. Pass `startaddr` set to the ELF `e_entry`, not the `-T` base address.
+decoding. Pass `startaddr` set to the ELF `e_entry`.
 
 License
 =======

@@ -92,10 +92,10 @@ The image is linked to run from DRAM (text segment at DRAM base + 64 KB):
 
 ```sh
 GOOS=tamago GOOSPKG=github.com/usbarmory/tamago/goos GOARCH=riscv64 \
-	${TAMAGO} build -ldflags "-T 0x41010000" main.go
+	${TAMAGO} build main.go
 ```
 
-The ELF entry point differs from the `-T` text base; extract it for the loader:
+The ELF entry point can be extracted for the loader as follows:
 
 ```sh
 riscv64-linux-gnu-readelf -h main | awk '/Entry point/{print $4}'
