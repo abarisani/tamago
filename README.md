@@ -235,6 +235,7 @@ definition for the `internal/runtime/goospkg` overlay:
 * `linkprintk`: override `printk`
 * `linkcpuinit`: override `cpuinit`
 * `tiny`: reduce heap allocation requirements
+* `shared_stack`: increase system stack for OS/Monitor/Hypervisor use
 
 Executing and debugging
 =======================

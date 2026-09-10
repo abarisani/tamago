@@ -31,8 +31,4 @@ const (
 	// MinPhysPageSize is a lower-bound on the physical page size (see
 	// runtime.minPhysPageSize).
 	MinPhysPageSize = 96
-
-	// StackSystem is a number of additional bytes to add to each stack
-	// below the usual guard area.
-	StackSystem = 0
 )
