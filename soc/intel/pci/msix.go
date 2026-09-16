@@ -51,8 +51,12 @@ func (msix *CapabilityMSIX) TableSize() int {
 	return int(msix.MessageControl&0x7ff) + 1
 }
 
-// EnableInterrupt configures an MSI-X interrupt entry and enables the MSI-X
-// table.
+// EnableInterrupt configures an MSI-X table entry to raise the interrupt
+// vector encoded in data at the LAPIC instance addressed by addr, it also
+// enables the MSI-X table.
+//
+// When using [amd64.CPU.ServiceInterrupts] the message address must direct the
+// interrupt to the BSP (physical destination mode, destination ID 0).
 func (msix *CapabilityMSIX) EnableInterrupt(n int, addr uint64, data uint32) (err error) {
 	if n >= msix.TableSize() || msix.device == nil {
 		return errors.New("invalid capability instance")
