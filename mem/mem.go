@@ -10,7 +10,11 @@
 // see https://github.com/usbarmory/tamago.
 package mem
 
-import "unsafe"
+import (
+	"unsafe"
+
+	"github.com/usbarmory/tamago/goos"
+)
 
 var (
 	// RamStart defines the start address of the physical or virtual memory
@@ -27,6 +31,16 @@ var (
 	// available memory for stack allocation.
 	RamStackOffset uintptr
 )
+
+// Init initializes the memory range available to the runtime, it is intended
+// for moving heap allocation to extended memory in [goos.InitHW0].
+func Init(start uintptr, end uintptr) {
+	RamStart = start
+	RamSize = end - start
+
+	goos.Bloc = start
+	goos.BlocMax = end
+}
 
 // Region returns the start and end addresses of the physical RAM assigned to
 // the Go runtime.
