@@ -86,11 +86,15 @@ func SignalReady() bool
 
 // Optional variables/functions.
 var (
-	// Bloc is an optional variable which can be set to redefine the heap
-	// memory start address, this is typically only required on OS
-	// supported environments. When used it must be set with a static
-	// initializer before package initialization.
+	// Bloc is an optional variable which can be set in [Hwinit0] to
+	// override the heap memory start address, which otherwise defaults to
+	// the program break (i.e. end of the data segments).
 	Bloc uintptr
+
+	// BlocMax is an optional variable which can be set to override the
+	// upper bound for heap memory allocation, which otherwise defaults to
+	// the top of g0 stack.
+	BlocMax uintptr
 
 	// Exit is an optional function which can be set to override default
 	// runtime termination.

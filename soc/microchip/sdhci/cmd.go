@@ -10,6 +10,7 @@ package sdhci
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 
 	"github.com/usbarmory/tamago/bits"
@@ -178,6 +179,8 @@ func (hw *SDHCI) pollStatusIgnoring(expected uint16, timeout time.Duration, igno
 		if time.Now().After(deadline) {
 			return 0, ignored, fmt.Errorf("status 0x%04x timeout", expected)
 		}
+
+		runtime.Gosched()
 	}
 }
 
@@ -202,7 +205,7 @@ func (hw *SDHCI) invalidateTransfer(err error) error {
 }
 
 func (hw *SDHCI) invalidateStop(transferErr error, stopErr error) error {
-	recoveryErr := fmt.Errorf("CMD12 STOP_TRANSMISSION failed: %w", stopErr)
+	recoveryErr := fmt.Errorf("CMD12 STOP_TRANSMISSION failed, %w", stopErr)
 
 	if transferErr != nil {
 		recoveryErr = fmt.Errorf("%w (transfer error: %v)", recoveryErr, transferErr)
@@ -242,11 +245,11 @@ func (hw *SDHCI) waitState(state int, timeout time.Duration) error {
 		status, err := hw.cmd(13, uint32(hw.card.RCA)<<16)
 
 		if err != nil {
-			return fmt.Errorf("CMD13 SEND_STATUS failed: %w", err)
+			return fmt.Errorf("CMD13 SEND_STATUS failed, %w", err)
 		}
 
 		if err := checkR1(status); err != nil {
-			return fmt.Errorf("CMD13 SEND_STATUS: %w", err)
+			return fmt.Errorf("CMD13 SEND_STATUS, %w", err)
 		}
 
 		if bits.Get(&status, STATUS_READY_FOR_DATA) && bits.GetN(&status, STATUS_CURRENT_STATE, STATUS_CURRENT_STATE_MASK) == uint32(state) {
@@ -256,6 +259,8 @@ func (hw *SDHCI) waitState(state int, timeout time.Duration) error {
 		if time.Now().After(deadline) {
 			return fmt.Errorf("card ready timeout status=0x%08x", status)
 		}
+
+		runtime.Gosched()
 	}
 }
 
