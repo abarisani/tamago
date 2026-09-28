@@ -86,7 +86,7 @@ func SignalReady() bool
 
 // Optional variables/functions.
 var (
-	// Bloc is an optional variable which can be set in [Hwinit0] to
+	// Bloc is an optional variable which can be set in [InitHW0] to
 	// override the heap memory start address, which otherwise defaults to
 	// the program break (i.e. end of the data segments).
 	Bloc uintptr
