@@ -85,7 +85,7 @@ func Signal(s int)
 //
 // Its implementation is linked from the Go runtime, rather than GOOSPKG, and
 // is provided to be called from exception handlers written in Go assembly.
-func SystemStack(fn func()) {}
+func SystemStack(fn func())
 
 // Optional variables/functions.
 var (
