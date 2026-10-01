@@ -17,7 +17,6 @@ import (
 
 	"github.com/usbarmory/tamago/amd64/lapic"
 	"github.com/usbarmory/tamago/dma"
-	"github.com/usbarmory/tamago/goos"
 )
 
 // Interrupt Gate Descriptor Attributes
@@ -132,11 +131,6 @@ func (cpu *CPU) ClearInterrupt() {
 		cpu.LAPIC.ClearInterrupt()
 		irqLock = false
 		return
-	}
-
-	// ensure parent is waiting on channel
-	for !goos.SignalReady() {
-		// stay on this M
 	}
 
 	// ensure we are not interrupting ·handleInterrupt on BSP

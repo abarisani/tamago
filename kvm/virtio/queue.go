@@ -23,6 +23,8 @@ const (
 	Write = 2
 )
 
+const pageSize = 4096
+
 // Descriptor represents a VirtIO virtual queue descriptor.
 //
 // All exported fields are used one-time at initialization, fields requiring
@@ -50,7 +52,7 @@ func (d *Descriptor) Bytes() []byte {
 }
 
 // Init initializes a virtual queue descriptor for the given reserved DMA
-// buffer, which must have been prefiously created with dma.Reserve().
+// buffer, which must have been previously created with dma.Reserve().
 func (d *Descriptor) Init(buf []byte, flags uint16) {
 	res, addr := dma.Reserved(buf)
 

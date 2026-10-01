@@ -45,11 +45,21 @@ TEXT ·read_scause(SB),NOSPLIT,$0-8
 	RET
 
 TEXT ·trapHandler(SB),NOSPLIT|NOFRAME,$0
+	// save T0
+	CSRRW	T0, MSCRATCH, T0
+
 	CSRRS	ZERO, MCAUSE, T0
 	BLT	ZERO, T0, fault
+
+	// restore T0
+	CSRRW	T0, MSCRATCH, T0
 	JMP	·handleInterrupt(SB)
 fault:
 	MOV	$·SystemExceptionHandler(SB), T0
 	MOV	(T0), T0
 	MOV	T0, 8(SP)
+
+	// restore T0
+	CSRRW	T0, MSCRATCH, T0
+
 	CALL	internal∕runtime∕goospkg·SystemStack(SB)

@@ -74,18 +74,26 @@ func WriteConsole(c byte)
 // runtime setup (post World start).
 func InitHW1()
 
-// SendSignal delivers a signal to be handled through [signal.Notify]. Its
-// implementation is linked from the Go runtime, rather than GOOSPKG, and is
-// provided to be called from exception handlers written in Go assembly.
-func SendSignal(s int)
+// Signal delivers a signal to be handled through [signal.Notify].
+//
+// Its implementation is linked from the Go runtime, rather than GOOSPKG, and
+// is safe to be called from interrupt handlers written in Go assembly.
+func Signal(s int)
 
-// SignalReady returns whether package [signal] is blocked waiting for an
-// incoming signal or it is handling one through [signal.Notify]. Its
-// implementation is linked from the Go runtime and not GOOSPKG.
-func SignalReady() bool
+// SystemStack runs fn on a system stack, it is only meant for use by exception
+// handlers on unrecoverable errors.
+//
+// Its implementation is linked from the Go runtime, rather than GOOSPKG, and
+// is provided to be called from exception handlers written in Go assembly.
+func SystemStack(fn func()) {}
 
 // Optional variables/functions.
 var (
+	// TextAddr is an optional variable which can be set to initialize the
+	// start address of text symbols in a manner equivalent to 'go tool
+	// link -T' or 'go build -ldflags=-T'.
+	TextAddr uintptr
+
 	// Bloc is an optional variable which can be set in [InitHW0] to
 	// override the heap memory start address, which otherwise defaults to
 	// the program break (i.e. end of the data segments).

@@ -67,7 +67,7 @@ TEXT ·handleInterrupt(SB),NOSPLIT|NOFRAME,$0
 	ADDVU	$(-32*8), R3, R3
 	MOVV	$(const_IRQ_SIGNAL), R4
 	MOVV	R4, 8(R3)
-	CALL	internal∕runtime∕goospkg·SendSignal(SB)
+	CALL	internal∕runtime∕goospkg·Signal(SB)
 	ADDVU	$(32*8), R3, R3
 
 	// keep interrupts masked on return: clear PRMD.PIE (bit 2)

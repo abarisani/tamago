@@ -118,7 +118,7 @@ TEXT ·handleInterrupt(SB),NOSPLIT|NOFRAME,$0
 
 	MOVQ	$(const_IRQ_SIGNAL), AX
 	PUSHQ	AX
-	CALL	internal∕runtime∕goospkg·SendSignal(SB)
+	CALL	internal∕runtime∕goospkg·Signal(SB)
 	POPQ	AX
 
 	// wake idle APs
