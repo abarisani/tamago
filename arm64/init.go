@@ -12,6 +12,8 @@ import (
 	_ "unsafe"
 )
 
+var mmu mmuMap
+
 // Init takes care of the lower level initialization triggered before runtime
 // setup (pre World start).
 //
@@ -24,6 +26,6 @@ func Init() {
 	//
 	// To prevent faults, MMU initialization is done as soon as possible in
 	// InitHW0, rather than in InitHW1.
-	cpu := &CPU{}
-	cpu.InitMMU()
+	mmu = mmuMap{}
+	mmu.Init()
 }
