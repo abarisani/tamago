@@ -29,6 +29,7 @@ import (
 	"github.com/usbarmory/tamago/bits"
 	"github.com/usbarmory/tamago/dma"
 	"github.com/usbarmory/tamago/internal/reg"
+	"github.com/usbarmory/tamago/soc/microchip/internal/gck"
 )
 
 // SDMMC registers
@@ -131,15 +132,6 @@ const (
 	MC1R_FCD    = 7
 )
 
-// Generic Clock Configuration register fields
-const (
-	GCK_ENA            = 0
-	GCK_SRC_SEL        = 8
-	GCK_SRC_SEL_MASK   = 0x3
-	GCK_PRESCALER      = 16
-	GCK_PRESCALER_MASK = 0xff
-)
-
 // SDHCI constants
 const (
 	// data transfer direction
@@ -159,8 +151,8 @@ const (
 
 	r1ErrorMask uint32 = 0xfff9a080
 
-	// arm64 SIMD copies require 16-byte aligned Device memory.
-	dmaAlignment = max(admaAlignment, 0x10)
+	// arm64 SIMD copies require 16-byte aligned Device memory
+	dmaAlignment = 16
 
 	// BlockSize is the size of a sector-addressed eMMC block.
 	BlockSize            = MMC_DEFAULT_BLOCK_SIZE
@@ -278,30 +270,16 @@ type SDHCI struct {
 	maxBlocks int
 }
 
-func genericClockPrescaler(parent uint32, target uint32) (uint32, error) {
-	if parent == 0 || target == 0 {
-		return 0, errors.New("invalid clock frequency")
-	}
-
-	divider := (uint64(parent) + uint64(target) - 1) / uint64(target)
-
-	if divider > GCK_PRESCALER_MASK+1 {
-		return 0, errors.New("clock prescaler out of range")
-	}
-
-	return uint32(divider - 1), nil
-}
-
 func gckConfigurationMatches(value uint32, prescaler uint32) bool {
-	return bits.Get(&value, GCK_ENA) &&
-		bits.GetN(&value, GCK_SRC_SEL, GCK_SRC_SEL_MASK) == 0 &&
-		bits.GetN(&value, GCK_PRESCALER, GCK_PRESCALER_MASK) == prescaler
+	return bits.Get(&value, gck.GCK_ENA) &&
+		bits.GetN(&value, gck.GCK_SRC_SEL, 0b11) == 0 &&
+		bits.GetN(&value, gck.GCK_PRESCALER, 0xff) == prescaler
 }
 
 func (hw *SDHCI) enableGenericClock(prescaler uint32) error {
 	value := reg.Read(hw.GCK)
 
-	if bits.Get(&value, GCK_ENA) {
+	if bits.Get(&value, gck.GCK_ENA) {
 		// A previous firmware stage may leave SDCLK running. Stop it only
 		// after the command and data paths become idle, while the inherited
 		// functional clock is still available.
@@ -322,10 +300,7 @@ func (hw *SDHCI) enableGenericClock(prescaler uint32) error {
 	}
 
 	// select source 0 and configure the functional clock
-	reg.Clear(hw.GCK, GCK_ENA)
-	reg.SetN(hw.GCK, GCK_SRC_SEL, GCK_SRC_SEL_MASK, 0)
-	reg.SetN(hw.GCK, GCK_PRESCALER, GCK_PRESCALER_MASK, prescaler)
-	reg.Set(hw.GCK, GCK_ENA)
+	gck.Enable(hw.GCK, prescaler)
 
 	return nil
 }
@@ -335,7 +310,7 @@ func (hw *SDHCI) setClockFrequency(frequencyHz uint32) (err error) {
 		return errors.New("invalid SD clock frequency")
 	}
 
-	prescaler, err := genericClockPrescaler(hw.ParentClock, hw.TargetClock)
+	prescaler, err := gck.Prescaler(hw.ParentClock, hw.TargetClock)
 
 	if err != nil {
 		return
@@ -473,7 +448,7 @@ func (hw *SDHCI) Init() (err error) {
 		return errors.New("DMA memory is too small")
 	}
 
-	prescaler, err := genericClockPrescaler(hw.ParentClock, hw.TargetClock)
+	prescaler, err := gck.Prescaler(hw.ParentClock, hw.TargetClock)
 
 	if err != nil {
 		return
@@ -565,7 +540,7 @@ func (hw *SDHCI) transferBlocks(index uint16, dtd uint32, lba int, buf []byte) (
 
 		length := blocks * BlockSize
 
-		if err = hw.transferDMA(index, dtd, uint32(lba), buf[:length], uint16(blocks)); err != nil {
+		if err = hw.transfer(index, dtd, uint32(lba), buf[:length], uint16(blocks)); err != nil {
 			return
 		}
 
@@ -619,31 +594,17 @@ func (hw *SDHCI) Read(offset int64, size int64) (buf []byte, err error) {
 	return
 }
 
-func copyDMABuffer(dst []byte, src []byte) {
-	const size = 0x40
+func (hw *SDHCI) transfer(index uint16, direction uint32, lba uint32, buf []byte, blocks uint16) (err error) {
+	dmaAddress := hw.Region.Alloc(buf, dmaAlignment)
+	defer hw.Region.Free(dmaAddress)
 
-	// Bounded copies avoid arm64 memmove realigning Device accesses.
-	for len(src) >= size {
-		copy(dst[:size], src[:size])
-		dst, src = dst[size:], src[size:]
-	}
-
-	// Payloads and descriptor tables are multiples of eight bytes.
-	copy(dst, src)
-}
-
-func (hw *SDHCI) transferDMA(index uint16, direction uint32, lba uint32, buf []byte, blocks uint16) (err error) {
-	dmaAddress, dmaBuffer := hw.Region.Reserve(len(buf), dmaAlignment)
-	defer hw.Region.Release(dmaAddress)
-
-	if direction == WRITE {
-		copyDMABuffer(dmaBuffer, buf)
+	if dmaAddress%dmaAlignment != 0 {
+		return fmt.Errorf("DMA buffer %#x is not %d-byte aligned", dmaAddress, dmaAlignment)
 	}
 
 	descriptors := admaTable(dmaAddress, len(buf))
-	descriptorAddress, descriptorBuffer := hw.Region.Reserve(len(descriptors), dmaAlignment)
-	defer hw.Region.Release(descriptorAddress)
-	copyDMABuffer(descriptorBuffer, descriptors)
+	descriptorAddress := hw.Region.Alloc(descriptors, dmaAlignment)
+	defer hw.Region.Free(descriptorAddress)
 
 	// program the ADMA table
 	reg.Write(hw.asar0, uint32(descriptorAddress))
@@ -733,7 +694,7 @@ func (hw *SDHCI) transferDMA(index uint16, direction uint32, lba uint32, buf []b
 	}
 
 	if direction == READ {
-		copyDMABuffer(buf, dmaBuffer)
+		hw.Region.Read(dmaAddress, 0, buf)
 	}
 
 	return
