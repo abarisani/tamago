@@ -62,6 +62,12 @@ done:
 	STI
 	RET
 
+// func set_cr8(val uint64)
+TEXT ·set_cr8(SB),NOSPLIT,$0-8
+	MOVQ	val+0(FP), AX
+	MOVQ	AX, CR8
+	RET
+
 // func wfi()
 TEXT ·wfi(SB),NOSPLIT|NOFRAME,$0
 	// disable interrupts to avoid races while checking state
@@ -116,6 +122,11 @@ TEXT ·handleInterrupt(SB),NOSPLIT|NOFRAME,$0
 	MOVB	$1, ·irqHandling(SB)
 	MOVB	$1, ·irqLock(SB)
 
+	// hold pending all device interrupts until CPU.ClearInterrupt, as the
+	// End-Of-Interrupt is deferred and a single vector (·isr) is tracked
+	MOVL	$(const_irqServicingPriority>>4), AX
+	MOVQ	AX, CR8
+
 	MOVQ	$(const_IRQ_SIGNAL), AX
 	PUSHQ	AX
 	CALL	internal∕runtime∕goospkg·Signal(SB)
@@ -163,6 +174,10 @@ TEXT ·handleRelay(SB),NOSPLIT|NOFRAME,$0
 	MOVL	$0, (AX)
 	// clear the serviced interrupt
 	MOVL	$0, (AX)
+
+	// accept device interrupts again
+	XORQ	AX, AX
+	MOVQ	AX, CR8
 
 	// restore caller registers
 	POPQ	AX

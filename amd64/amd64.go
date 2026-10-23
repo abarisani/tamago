@@ -59,12 +59,19 @@ type CPU struct {
 	// LAPIC represents the Local APIC instance
 	LAPIC *lapic.LAPIC
 
+	// ISR represents the interrupt service routine invoked by
+	// [CPU.ServiceInterrupts]
+	ISR func(int)
+
 	// init represents the last initialized CPU index
 	init int
 	// features
 	features Features
 	// core frequency in Hz
 	freq uint32
+
+	// page table allocation state (see ConfigureMMU)
+	mmu mmu
 }
 
 // defined in amd64.s

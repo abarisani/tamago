@@ -12,6 +12,7 @@ import (
 	"encoding/binary"
 	"errors"
 
+	"github.com/usbarmory/tamago/amd64"
 	"github.com/usbarmory/tamago/dma"
 )
 
@@ -27,6 +28,8 @@ type CapabilityMSIX struct {
 
 	device *Device
 	off    uint32
+
+	table uint64
 }
 
 // Unmarshal decodes a PCI MSI-X Capability from the argument device
@@ -51,20 +54,28 @@ func (msix *CapabilityMSIX) TableSize() int {
 	return int(msix.MessageControl&0x7ff) + 1
 }
 
-// EnableInterrupt configures an MSI-X table entry to raise the interrupt
-// vector encoded in data at the LAPIC instance addressed by addr, it also
-// enables the MSI-X table.
-//
-// When using [amd64.CPU.ServiceInterrupts] the message address must direct the
-// interrupt to the BSP (physical destination mode, destination ID 0).
+// TableBAR returns the Base Address Register index (BIR) and offset of the
+// MSI-X table.
+func (msix *CapabilityMSIX) TableBAR() (bir int, offset uint32) {
+	bir = int(msix.TableOffset & 0b111)
+	offset = msix.TableOffset &^ 0b111
+	return
+}
+
+// EnableInterrupt configures an MSI-X interrupt entry and enables the MSI-X
+// table.
 func (msix *CapabilityMSIX) EnableInterrupt(n int, addr uint64, data uint32) (err error) {
 	if n >= msix.TableSize() || msix.device == nil {
 		return errors.New("invalid capability instance")
 	}
 
-	bir := int(msix.TableOffset & 0b111)
-	bar := uint64(msix.device.BaseAddress(bir)) &^ 0xf
-	table := bar + uint64(msix.TableOffset&^0b111)
+	table := msix.table
+
+	if table == 0 {
+		bir, offset := msix.TableBAR()
+		bar := uint64(msix.device.BaseAddress(bir)) &^ 0xf
+		table = bar + uint64(offset)
+	}
 
 	size := 16
 	off := uint64(size * n)
@@ -85,4 +96,33 @@ func (msix *CapabilityMSIX) EnableInterrupt(n int, addr uint64, data uint32) (er
 	msix.device.Write(0, msix.off, 1<<msixEnable)
 
 	return
+}
+
+// MapMSIX returns the device MSI-X capability, with its table mapped as device
+// memory (see [Device.MapBAR]).
+func (d *Device) MapMSIX(cpu *amd64.CPU) (msix *CapabilityMSIX, err error) {
+	for off, hdr := range d.Capabilities() {
+		if hdr.Vendor != MSIX {
+			continue
+		}
+
+		msix = &CapabilityMSIX{}
+
+		if err = msix.Unmarshal(d, off); err != nil {
+			return nil, err
+		}
+
+		bir, offset := msix.TableBAR()
+		va, _, err := d.MapBAR(cpu, bir)
+
+		if err != nil {
+			return nil, err
+		}
+
+		msix.table = va + uint64(offset)
+
+		return msix, nil
+	}
+
+	return nil, errors.New("MSI-X capability not found")
 }

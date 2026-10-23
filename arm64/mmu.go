@@ -26,117 +26,6 @@ const (
 	outputAddressMask uint64 = 0x0000_ffff_ffff_f000
 )
 
-type mmuMap struct {
-	ramStart  uint64
-	ramEnd    uint64
-	textStart uint64
-	textEnd   uint64
-
-	arenaNext uint64
-	arenaEnd  uint64
-}
-
-type mappingAction uint8
-
-const (
-	mappingDevice mappingAction = iota
-	mappingMemoryExec
-	mappingMemoryXN
-	mappingSplit
-)
-
-func alignDown(addr uintptr, align uintptr) uintptr {
-	return addr &^ (align - 1)
-}
-
-func alignUp(addr uintptr, align uintptr) uintptr {
-	return alignDown(addr+align-1, align)
-}
-
-func (m *mmuMap) init() {
-	ramStart, ramEnd := mem.Region()
-	textStart, textEnd := mem.Text()
-
-	if ramStart&(pageTableSize-1) != 0 || ramEnd&(pageTableSize-1) != 0 {
-		panic("RAM region not 4KB aligned")
-	}
-
-	m.ramStart = uint64(ramStart)
-	m.ramEnd = uint64(ramEnd)
-	m.textStart = uint64(alignDown(textStart, pageTableSize))
-	m.textEnd = uint64(alignUp(textEnd, pageTableSize))
-
-	if m.textStart < m.ramStart || m.textEnd > m.ramEnd {
-		panic("text region outside RAM")
-	}
-
-	m.arenaNext = m.ramStart + pageTableArenaOffset
-	m.arenaEnd = m.textStart
-
-	if m.arenaNext >= m.arenaEnd {
-		panic("empty early page table space; link binary higher in RAM")
-	}
-
-	return
-}
-
-func (m *mmuMap) alloc() (addr uint64) {
-	addr = m.arenaNext
-
-	if addr+pageTableSize > m.arenaEnd {
-		panic("out of early page table space; link binary higher in RAM")
-	}
-
-	m.arenaNext += pageTableSize
-
-	return
-}
-
-func (m *mmuMap) classifyBlock(addr uint64, end uint64) (action mappingAction) {
-	switch {
-	case addr >= m.ramStart && end <= m.textEnd:
-		// exception vector table
-		action = mappingMemoryExec
-	case addr >= m.textEnd && end <= m.ramEnd:
-		// runtime memory
-		action = mappingMemoryXN
-	case addr >= m.ramStart && end <= m.ramEnd:
-		// text/runtime boundary cross
-		action = mappingSplit
-	case addr < m.ramEnd && end > m.ramStart:
-		// RAM boundary cross
-		action = mappingSplit
-	default:
-		action = mappingDevice
-	}
-
-	return
-}
-
-func (m *mmuMap) classifyPage(addr uint64) (action mappingAction) {
-	end := addr + pageTableSize
-	action = m.classifyBlock(addr, end)
-
-	if action == mappingSplit {
-		panic("MMU boundary is not 4KB aligned")
-	}
-
-	return
-}
-
-func writeMapping(page uint64, addr uint64, memoryRegion uint64, deviceRegion uint64, action mappingAction) {
-	switch action {
-	case mappingMemoryExec:
-		reg.Write64(page, addr|memoryRegion)
-	case mappingMemoryXN:
-		reg.Write64(page, addr|memoryRegion|TTE_EXECUTE_NEVER)
-	case mappingDevice:
-		reg.Write64(page, addr|deviceRegion|TTE_EXECUTE_NEVER)
-	default:
-		panic("invalid MMU mapping action")
-	}
-}
-
 // Memory region attributes
 //
 // ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile
@@ -212,6 +101,117 @@ const (
 		25<<TCR_T0SZ
 )
 
+type mmu struct {
+	ramStart  uint64
+	ramEnd    uint64
+	textStart uint64
+	textEnd   uint64
+
+	arenaNext uint64
+	arenaEnd  uint64
+}
+
+type mappingAction uint8
+
+const (
+	mappingDevice mappingAction = iota
+	mappingMemoryExec
+	mappingMemoryXN
+	mappingSplit
+)
+
+func alignDown(addr uintptr, align uintptr) uintptr {
+	return addr &^ (align - 1)
+}
+
+func alignUp(addr uintptr, align uintptr) uintptr {
+	return alignDown(addr+align-1, align)
+}
+
+func (m *mmu) init() {
+	ramStart, ramEnd := mem.Region()
+	textStart, textEnd := mem.Text()
+
+	if ramStart&(pageTableSize-1) != 0 || ramEnd&(pageTableSize-1) != 0 {
+		panic("RAM region not 4KB aligned")
+	}
+
+	m.ramStart = uint64(ramStart)
+	m.ramEnd = uint64(ramEnd)
+	m.textStart = uint64(alignDown(textStart, pageTableSize))
+	m.textEnd = uint64(alignUp(textEnd, pageTableSize))
+
+	if m.textStart < m.ramStart || m.textEnd > m.ramEnd {
+		panic("text region outside RAM")
+	}
+
+	m.arenaNext = m.ramStart + pageTableArenaOffset
+	m.arenaEnd = m.textStart
+
+	if m.arenaNext >= m.arenaEnd {
+		panic("empty early page table space; link binary higher in RAM")
+	}
+
+	return
+}
+
+func (m *mmu) alloc() (addr uint64) {
+	addr = m.arenaNext
+
+	if addr+pageTableSize > m.arenaEnd {
+		panic("out of early page table space; link binary higher in RAM")
+	}
+
+	m.arenaNext += pageTableSize
+
+	return
+}
+
+func (m *mmu) classifyBlock(addr uint64, end uint64) (action mappingAction) {
+	switch {
+	case addr >= m.ramStart && end <= m.textEnd:
+		// exception vector table
+		action = mappingMemoryExec
+	case addr >= m.textEnd && end <= m.ramEnd:
+		// runtime memory
+		action = mappingMemoryXN
+	case addr >= m.ramStart && end <= m.ramEnd:
+		// text/runtime boundary cross
+		action = mappingSplit
+	case addr < m.ramEnd && end > m.ramStart:
+		// RAM boundary cross
+		action = mappingSplit
+	default:
+		action = mappingDevice
+	}
+
+	return
+}
+
+func (m *mmu) classifyPage(addr uint64) (action mappingAction) {
+	end := addr + pageTableSize
+	action = m.classifyBlock(addr, end)
+
+	if action == mappingSplit {
+		panic("MMU boundary is not 4KB aligned")
+	}
+
+	return
+}
+
+func writeMapping(page uint64, addr uint64, memoryRegion uint64, deviceRegion uint64, action mappingAction) {
+	switch action {
+	case mappingMemoryExec:
+		reg.Write64(page, addr|memoryRegion)
+	case mappingMemoryXN:
+		reg.Write64(page, addr|memoryRegion|TTE_EXECUTE_NEVER)
+	case mappingDevice:
+		reg.Write64(page, addr|deviceRegion|TTE_EXECUTE_NEVER)
+	default:
+		panic("invalid MMU mapping action")
+	}
+}
+
 // defined in mmu.s
 func flush_tlb()
 func write_mair_el1(val uint64)
@@ -220,7 +220,7 @@ func set_ttbr0_el1(addr uint64)
 
 // ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile
 // D5.3.1 Translation table level 0, level 1, and level 2 descriptor formats.
-func (m *mmuMap) initL1Table(entry int, ttbr uint64, section uint64) {
+func (m *mmu) initL1Table(entry int, ttbr uint64, section uint64) {
 	n := 30 // 1GB
 
 	memoryRegion := MemoryAttributes | TTE_BLOCK
@@ -244,7 +244,7 @@ func (m *mmuMap) initL1Table(entry int, ttbr uint64, section uint64) {
 
 // ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile
 // D5.3.1 Translation table level 0, level 1, and level 2 descriptor formats.
-func (m *mmuMap) initL2Table(entry int, base uint64, section uint64) {
+func (m *mmu) initL2Table(entry int, base uint64, section uint64) {
 	n := 21 // 2MB
 
 	memoryRegion := MemoryAttributes | TTE_BLOCK
@@ -268,7 +268,7 @@ func (m *mmuMap) initL2Table(entry int, base uint64, section uint64) {
 
 // ARM Architecture Reference Manual ARMv8, for ARMv8-A architecture profile
 // D5.3.2 ARMv8 translation table level 3 descriptor formats.
-func (m *mmuMap) initL3Table(entry int, base uint64, section uint64) {
+func (m *mmu) initL3Table(entry int, base uint64, section uint64) {
 	n := 12 // 4KB
 
 	memoryRegion := MemoryAttributes | TTE_PAGE
@@ -285,7 +285,7 @@ func (m *mmuMap) initL3Table(entry int, base uint64, section uint64) {
 // l2Entry returns the second-level descriptor address for the argument
 // address, splitting a first-level block into second-level blocks with the
 // same attributes if needed.
-func (m *mmuMap) l2Entry(addr uint64) (page uint64) {
+func (m *mmu) l2Entry(addr uint64) (page uint64) {
 	l1 := m.ramStart + l1pageTableOffset + 8*(addr>>30)
 	tte := reg.Read64(l1)
 
@@ -321,7 +321,7 @@ func (m *mmuMap) l2Entry(addr uint64) (page uint64) {
 //
 // All available memory is marked as non-executable except for the range
 // returned by mem.Text().
-func (m *mmuMap) Init() {
+func (m *mmu) Init() {
 	m.init()
 
 	l1pageTableStart := m.ramStart + l1pageTableOffset
