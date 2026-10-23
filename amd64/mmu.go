@@ -10,11 +10,11 @@ package amd64
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
 
 	"github.com/usbarmory/tamago/bits"
 	"github.com/usbarmory/tamago/internal/reg"
+	"github.com/usbarmory/tamago/mem"
 )
 
 const (
@@ -70,11 +70,11 @@ func alignUp(addr uint64, align uint64) uint64 {
 
 func (m *mmu) alloc() (addr uint64) {
 	if m.arenaEnd == 0 {
-		ramStart, _ := runtime.MemRegion()
-		textStart, _ := runtime.TextRegion()
+		ramStart, _ := mem.Region()
+		textStart, _ := mem.Text()
 
-		m.arenaNext = alignUp(ramStart, pageTableSize)
-		m.arenaEnd = alignDown(textStart, pageTableSize)
+		m.arenaNext = alignUp(uint64(ramStart), pageTableSize)
+		m.arenaEnd = alignDown(uint64(textStart), pageTableSize)
 	}
 
 	if m.arenaNext+pageTableSize > m.arenaEnd {
