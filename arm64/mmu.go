@@ -120,11 +120,11 @@ const (
 	mappingSplit
 )
 
-func alignDown(addr uintptr, align uintptr) uintptr {
+func alignDown(addr uint64, align uint64) uint64 {
 	return addr &^ (align - 1)
 }
 
-func alignUp(addr uintptr, align uintptr) uintptr {
+func alignUp(addr uint64, align uint64) uint64 {
 	return alignDown(addr+align-1, align)
 }
 
@@ -138,8 +138,8 @@ func (m *mmu) init() {
 
 	m.ramStart = uint64(ramStart)
 	m.ramEnd = uint64(ramEnd)
-	m.textStart = uint64(alignDown(textStart, pageTableSize))
-	m.textEnd = uint64(alignUp(textEnd, pageTableSize))
+	m.textStart = alignDown(uint64(textStart), pageTableSize)
+	m.textEnd = alignUp(uint64(textEnd), pageTableSize)
 
 	if m.textStart < m.ramStart || m.textEnd > m.ramEnd {
 		panic("text region outside RAM")
@@ -291,7 +291,7 @@ func (m *mmu) l2Entry(addr uint64) (page uint64) {
 
 	if tte&TTE_TABLE != TTE_TABLE {
 		next := m.alloc()
-		section := uint64(alignDown(uintptr(addr), 1<<30))
+		section := alignDown(addr, 1<<30)
 
 		for i := uint64(0); i < entriesPerTable; i++ {
 			var val uint64
