@@ -41,8 +41,14 @@ var ARM = &arm.CPU{
 var ramStackOffset uintptr = 0x100000 // 1 MB
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
-	return int64(float64(read_systimer())*ARM.TimerMultiplier) + ARM.TimerOffset
+func nanotime(monotonic bool) (ns int64) {
+	ns = int64(float64(read_systimer())*ARM.TimerMultiplier)
+
+	if monotonic {
+		return
+	}
+
+	return ns + ARM.TimerOffset
 }
 
 // Init takes care of the lower level initialization triggered early in runtime

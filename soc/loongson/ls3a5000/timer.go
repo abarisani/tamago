@@ -13,6 +13,6 @@ import (
 )
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
-	return LA64.GetTime()
+func nanotime(monotonic bool) int64 {
+	return LA64.GetTime(monotonic)
 }

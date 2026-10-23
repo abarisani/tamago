@@ -34,7 +34,7 @@ func initRNG() {
 	// InitRNG also fires before InitHW1, so start the timer here to make
 	// nanotime() usable as a seed source.
 	initTimer()
-	PRNG.Seed(uint32(nanotime()))
+	PRNG.Seed(uint32(nanotime(false)))
 
 	rng.GetRandomDataFn = PRNG.GetRandomData
 }

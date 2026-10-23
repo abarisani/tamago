@@ -71,8 +71,8 @@ var (
 )
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
-	return AMD64.GetTime()
+func nanotime(monotonic bool) int64 {
+	return AMD64.GetTime(monotonic)
 }
 
 // Init takes care of the lower level initialization triggered early in runtime

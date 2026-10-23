@@ -28,12 +28,12 @@ const (
 // defined in syscall_*.s
 func sys_exit(code int32)
 func sys_write(c *byte)
-func sys_clock_gettime() (ns int64)
+func sys_clock_gettime(monotonic bool) (ns int64)
 func sys_getrandom(b []byte, n int)
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
-	return sys_clock_gettime()
+func nanotime(monotonic bool) int64 {
+	return sys_clock_gettime(monotonic)
 }
 
 //go:linkname initRNG internal/runtime/goospkg.InitRNG

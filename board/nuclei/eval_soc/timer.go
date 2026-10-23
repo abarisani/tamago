@@ -35,6 +35,6 @@ func mulDiv(x, m, d uint64) uint64 {
 }
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
+func nanotime(_ bool) int64 {
 	return int64(mulDiv(rdtime(), 1e9, TIMER_FREQ))
 }

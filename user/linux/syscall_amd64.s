@@ -15,7 +15,8 @@
 #define SYS_clock_gettime	228
 #define SYS_getrandom		318
 
-#define CLOCK_REALTIME 0
+#define CLOCK_REALTIME	0
+#define CLOCK_MONOTONIC	1
 
 TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
 	MOVQ	$(const_ramStart), DI
@@ -36,11 +37,13 @@ TEXT cpuinit(SB),NOSPLIT|NOFRAME,$0
 
 	JMP	_rt0_tamago_start(SB)
 
-// func sys_clock_gettime() int64
-TEXT ·sys_clock_gettime(SB),NOSPLIT,$40-8
+// func sys_clock_gettime(monotonic bool) int64
+TEXT ·sys_clock_gettime(SB),NOSPLIT,$40-16
+	// monotonic (bool) maps directly to CLOCK_REALTIME or CLOCK_MONOTONIC
+	MOVBLZX	monotonic+0(FP), DI
+
 	SUBQ	$16, SP		// Space for results
 
-	MOVL	$CLOCK_REALTIME, DI
 	LEAQ	0(SP), SI
 	MOVQ	$SYS_clock_gettime, AX
 	SYSCALL
@@ -51,7 +54,7 @@ TEXT ·sys_clock_gettime(SB),NOSPLIT,$40-8
 
 	IMULQ	$1000000000, AX
 	ADDQ	DX, AX
-	MOVQ	AX, ns+0(FP)
+	MOVQ	AX, ns+8(FP)
 
 	RET
 

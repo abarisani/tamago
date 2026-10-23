@@ -8,9 +8,15 @@
 
 package riscv64
 
-// GetTime returns the system time in nanoseconds.
-func (cpu *CPU) GetTime() int64 {
-	return int64(float64(cpu.Counter())*cpu.TimerMultiplier) + cpu.TimerOffset
+// GetTime returns the real or system time in nanoseconds.
+func (cpu *CPU) GetTime(monotonic bool) (ns int64) {
+	ns = int64(float64(cpu.Counter())*cpu.TimerMultiplier)
+
+	if monotonic {
+		return
+	}
+
+	return ns + cpu.TimerOffset
 }
 
 // SetTime adjusts the system time to the argument nanoseconds value.

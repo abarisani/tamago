@@ -26,6 +26,6 @@ func initTimers() {
 }
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
-	return ARM.GetTime()
+func nanotime(monotonic bool) int64 {
+	return ARM.GetTime(monotonic)
 }

@@ -105,7 +105,7 @@ var ARM = &arm.CPU{
 var ramStackOffset uintptr = 0x100000 // 1 MB
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
+func nanotime(_ bool) int64 {
 	return int64(readTimerExtended()) * 1000
 }
 

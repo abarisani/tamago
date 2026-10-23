@@ -29,6 +29,6 @@ func Counter() uint64 {
 }
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
-func nanotime() int64 {
-	return RV64.GetTime()
+func nanotime(monotonic bool) int64 {
+	return RV64.GetTime(monotonic)
 }
