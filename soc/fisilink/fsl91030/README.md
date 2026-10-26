@@ -37,9 +37,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Related board packages                                                                                                                                                   | Peripheral drivers                                                        |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Fisilink FSL91030 | [milkv/vega](https://github.com/usbarmory/tamago/tree/master/board/milkv/vega), [nuclei/eval_soc](https://github.com/usbarmory/tamago/tree/master/board/nuclei/eval_soc) | [CLINT, UART](https://github.com/usbarmory/tamago/tree/master/soc/sifive) |
+| SoC               | Related board packages          | Peripheral drivers        |
+|-------------------|---------------------------------|---------------------------|
+| Fisilink FSL91030 | [milkv/vega], [nuclei/eval_soc] | [CLINT, UART][soc/sifive] |
+
+[milkv/vega]:      https://github.com/usbarmory/tamago/tree/master/board/milkv/vega
+[nuclei/eval_soc]: https://github.com/usbarmory/tamago/tree/master/board/nuclei/eval_soc
+[soc/sifive]:      https://github.com/usbarmory/tamago/tree/master/soc/sifive
 
 > [!WARNING]
 > This package is in early development stages and its API might still change.

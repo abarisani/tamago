@@ -36,9 +36,12 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC            | Related board packages                                                                         | Peripheral drivers                                                                     |
-|----------------|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| Nuvoton NUC980 | [nuvoton/nuc980iiot](https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot) | [AIC, ETIMER, PRNG, UART](https://github.com/usbarmory/tamago/tree/master/soc/nuvoton) |
+| SoC            | Related board packages | Peripheral drivers                     |
+|----------------|------------------------|----------------------------------------|
+| Nuvoton NUC980 | [nuvoton/nuc980iiot]   | [AIC, ETIMER, PRNG, UART][soc/nuvoton] |
+
+[nuvoton/nuc980iiot]: https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot
+[soc/nuvoton]:        https://github.com/usbarmory/tamago/tree/master/soc/nuvoton
 
 Build tags
 ==========

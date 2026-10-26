@@ -46,9 +46,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU              | Board                                               | CPU package                                                    | Board package                                                                                    |
-|------------------|-----------------------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| AMD/Intel 64-bit | [Cloud Hypervisor](https://www.cloudhypervisor.org) | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [cloud_hypervisor/vm](https://github.com/usbarmory/tamago/tree/master/board/cloud_hypervisor/vm) |
+| CPU              | Board              | CPU package | Board package         |
+|------------------|--------------------|-------------|-----------------------|
+| AMD/Intel 64-bit | [Cloud Hypervisor] | [amd64]     | [cloud_hypervisor/vm] |
+
+[Cloud Hypervisor]:    https://www.cloudhypervisor.org
+[amd64]:               https://github.com/usbarmory/tamago/tree/master/amd64
+[cloud_hypervisor/vm]: https://github.com/usbarmory/tamago/tree/master/board/cloud_hypervisor/vm
 
 Compiling
 =========

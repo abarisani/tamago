@@ -45,9 +45,12 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Related board packages                                                         | Peripheral drivers                                                        |
-|-------------------|--------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Fisilink FSL91030 | [milkv/vega](https://github.com/usbarmory/tamago/tree/master/board/milkv/vega) | [UART, CLINT](https://github.com/usbarmory/tamago/tree/master/soc/sifive) |
+| SoC               | Related board packages | Peripheral drivers        |
+|-------------------|------------------------|---------------------------|
+| Fisilink FSL91030 | [milkv/vega]           | [UART, CLINT][soc/sifive] |
+
+[milkv/vega]: https://github.com/usbarmory/tamago/tree/master/board/milkv/vega
+[soc/sifive]: https://github.com/usbarmory/tamago/tree/master/soc/sifive
 
 > [!WARNING]
 > This package targets the Nuclei QEMU emulator only; it is not meant for

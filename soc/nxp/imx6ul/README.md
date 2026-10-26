@@ -40,10 +40,16 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC                    | Related board packages                                                               | Peripheral drivers                                                                                                                                                                                                                                                                      |
-|------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| NXP i.MX 6ULZ/i.MX6UL  | [usbarmory/mk2](https://github.com/usbarmory/tamago/tree/master/board/usbarmory)     | [BEE, CAAM, CSU, DCP, ENET, GPIO, I2C, OCOTP, RNGB, SPI, TEMPMON, UART, USB, USDHC, WDOG](https://github.com/usbarmory/tamago/tree/master/soc/nxp), [GIC](https://github.com/usbarmory/tamago/tree/master/arm/gic), [TZASC](https://github.com/usbarmory/tamago/tree/master/arm/tzc380) |
-| NXP i.MX 6ULL/i.MX6ULZ | [nxp/mx6ullevk](https://github.com/usbarmory/tamago/tree/master/board/nxp/mx6ullevk) | [BEE, CAAM, CSU, DCP, ENET, GPIO, I2C, OCOTP, RNGB, SPI, TEMPMON, UART, USB, USDHC, WDOG](https://github.com/usbarmory/tamago/tree/master/soc/nxp), [GIC](https://github.com/usbarmory/tamago/tree/master/arm/gic), [TZASC](https://github.com/usbarmory/tamago/tree/master/arm/tzc380) |
+| SoC                    | Related board packages | Peripheral drivers                                                                                                 |
+|------------------------|------------------------|--------------------------------------------------------------------------------------------------------------------|
+| NXP i.MX 6ULZ/i.MX6UL  | [usbarmory/mk2]        | [BEE, CAAM, CSU, DCP, ENET, GPIO, I2C, OCOTP, RNGB, SPI, TEMPMON, UART, USB, USDHC, WDOG][soc/nxp], [GIC], [TZASC] |
+| NXP i.MX 6ULL/i.MX6ULZ | [nxp/mx6ullevk]        | [BEE, CAAM, CSU, DCP, ENET, GPIO, I2C, OCOTP, RNGB, SPI, TEMPMON, UART, USB, USDHC, WDOG][soc/nxp], [GIC], [TZASC] |
+
+[usbarmory/mk2]: https://github.com/usbarmory/tamago/tree/master/board/usbarmory
+[soc/nxp]:       https://github.com/usbarmory/tamago/tree/master/soc/nxp
+[GIC]:           https://github.com/usbarmory/tamago/tree/master/arm/gic
+[TZASC]:         https://github.com/usbarmory/tamago/tree/master/arm/tzc380
+[nxp/mx6ullevk]: https://github.com/usbarmory/tamago/tree/master/board/nxp/mx6ullevk
 
 Build tags
 ==========

@@ -46,9 +46,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU              | Board                                                        | CPU package                                                    | Board package                                                                                    |
-|------------------|--------------------------------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| AMD/Intel 64-bit | [Firecracker microvm](https://firecracker-microvm.github.io) | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [firecracker/microvm](https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm) |
+| CPU              | Board                 | CPU package | Board package         |
+|------------------|-----------------------|-------------|-----------------------|
+| AMD/Intel 64-bit | [Firecracker microvm] | [amd64]     | [firecracker/microvm] |
+
+[Firecracker microvm]: https://firecracker-microvm.github.io
+[amd64]:               https://github.com/usbarmory/tamago/tree/master/amd64
+[firecracker/microvm]: https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm
 
 Compiling
 =========

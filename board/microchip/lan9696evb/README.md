@@ -44,9 +44,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Board                                                                           | SoC package                                                                      | Board package                                                                            |
-|-------------------|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| Microchip LAN969x | [EVB-LAN9696-24port](https://www.microchip.com/en-us/development-tool/ev23x71a) | [lan969x](https://github.com/usbarmory/tamago/tree/master/soc/microchip/lan969x) | [lan9696evb](https://github.com/usbarmory/tamago/tree/master/board/microchip/lan9696evb) |
+| SoC               | Board                | SoC package | Board package |
+|-------------------|----------------------|-------------|---------------|
+| Microchip LAN969x | [EVB-LAN9696-24port] | [lan969x]   | [lan9696evb]  |
+
+[EVB-LAN9696-24port]: https://www.microchip.com/en-us/development-tool/ev23x71a
+[lan969x]:            https://github.com/usbarmory/tamago/tree/master/soc/microchip/lan969x
+[lan9696evb]:         https://github.com/usbarmory/tamago/tree/master/board/microchip/lan9696evb
 
 Compiling
 =========

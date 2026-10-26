@@ -43,9 +43,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC             | Board                                                                                                    | SoC package                                                              | Board package                                                                    |
-|-----------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| NXP i.MX8M Plus | [8MPLUSLPD4-EVK](https://www.nxp.com/design/design-center/development-boards-and-designs/8MPLUSLPD4-EVK) | [imx8mp](https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx8mp) | [imx8mpevk](https://github.com/usbarmory/tamago/tree/master/board/nxp/imx8mpevk) |
+| SoC             | Board            | SoC package | Board package |
+|-----------------|------------------|-------------|---------------|
+| NXP i.MX8M Plus | [8MPLUSLPD4-EVK] | [imx8mp]    | [imx8mpevk]   |
+
+[8MPLUSLPD4-EVK]: https://www.nxp.com/design/design-center/development-boards-and-designs/8MPLUSLPD4-EVK
+[imx8mp]:         https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx8mp
+[imx8mpevk]:      https://github.com/usbarmory/tamago/tree/master/board/nxp/imx8mpevk
 
 > [!WARNING]
 > This package is in early development stages, only emulated runs (qemu) have been tested.

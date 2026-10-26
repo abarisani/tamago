@@ -43,9 +43,11 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC             | Related board packages                                                        | Peripheral drivers |
-|-----------------|-------------------------------------------------------------------------------|--------------------|
-| Loongson 3A5000 | [qemu/virt](https://github.com/usbarmory/tamago/blob/master/board/qemu/virt)  | UART               |
+| SoC             | Related board packages | Peripheral drivers |
+|-----------------|------------------------|--------------------|
+| Loongson 3A5000 | [qemu/virt]            | UART               |
+
+[qemu/virt]: https://github.com/usbarmory/tamago/blob/master/board/qemu/virt
 
 Secure random number generation
 ===============================

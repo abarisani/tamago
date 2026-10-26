@@ -39,10 +39,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU      | Related platform packages                                                                | Core drivers |
-|----------|------------------------------------------------------------------------------------------|--------------|
-| rv64gc   | [sifive_u](https://github.com/usbarmory/tamago/blob/master/board/qemu/sifive_u)          | PMP          |
-| rv64imfc | [erbium_emu](https://github.com/usbarmory/tamago/blob/master/board/aifoundry/erbium_emu) | PMP          |
+| CPU      | Related platform packages | Core drivers |
+|----------|---------------------------|--------------|
+| rv64gc   | [sifive_u]                | PMP          |
+| rv64imfc | [erbium_emu]              | PMP          |
+
+[sifive_u]:   https://github.com/usbarmory/tamago/blob/master/board/qemu/sifive_u
+[erbium_emu]: https://github.com/usbarmory/tamago/blob/master/board/aifoundry/erbium_emu
 
 Build tags
 ==========

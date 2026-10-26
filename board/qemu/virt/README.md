@@ -41,9 +41,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Board                                                                          | SoC package                                                                        | Board package                                                                |
-|-------------------|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| Loongson 3A5000   | [QEMU virt](https://www.qemu.org/docs/master/system/loongarch/virt.html)       | [ls3a5000](https://github.com/usbarmory/tamago/tree/master/soc/loongson/ls3a5000)  | [qemu/virt](https://github.com/usbarmory/tamago/tree/master/board/qemu/virt) |
+| SoC             | Board       | SoC package | Board package |
+|-----------------|-------------|-------------|---------------|
+| Loongson 3A5000 | [QEMU virt] | [ls3a5000]  | [qemu/virt]   |
+
+[QEMU virt]: https://www.qemu.org/docs/master/system/loongarch/virt.html
+[ls3a5000]:  https://github.com/usbarmory/tamago/tree/master/soc/loongson/ls3a5000
+[qemu/virt]: https://github.com/usbarmory/tamago/tree/master/board/qemu/virt
 
 Compiling
 =========

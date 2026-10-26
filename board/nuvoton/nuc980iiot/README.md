@@ -42,9 +42,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC            | Board                                                                                                     | SoC package                                                                    | Board package                                                                            |
-|----------------|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| Nuvoton NUC980 | [NuMaker-IIoT-NUC980G2](https://www.nuvoton.com/products/iot-solution/iot-platform/numaker-iiot-nuc980g2) | [nuc980](https://github.com/usbarmory/tamago/tree/master/soc/nuvoton/nuc980)   | [nuc980iiot](https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot)   |
+| SoC            | Board                   | SoC package | Board package |
+|----------------|-------------------------|-------------|---------------|
+| Nuvoton NUC980 | [NuMaker-IIoT-NUC980G2] | [nuc980]    | [nuc980iiot]  |
+
+[NuMaker-IIoT-NUC980G2]: https://www.nuvoton.com/products/iot-solution/iot-platform/numaker-iiot-nuc980g2
+[nuc980]:                https://github.com/usbarmory/tamago/tree/master/soc/nuvoton/nuc980
+[nuc980iiot]:            https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot
 
 Compiling
 =========

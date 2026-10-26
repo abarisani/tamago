@@ -40,12 +40,17 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC              | Board                | SoC package                                                            | Board package                                                                         |
-|------------------|----------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| Broadcom BCM2835 | Pi Zero              | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835) | [pi/pizero](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pizero) |
-| Broadcom BCM2835 | Pi 1 Model A+ (v1.2) | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835) | [pi/pi1](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pi1)       |
-| Broadcom BCM2835 | Pi 1 Model B+ (v1.2) | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835) | [pi/pi1](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pi1)       |
-| Broadcom BCM2836 | Pi 2 Model B (v1.1)  | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835) | [pi/pi2](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pi2)       |
+| SoC              | Board                | SoC package | Board package |
+|------------------|----------------------|-------------|---------------|
+| Broadcom BCM2835 | Pi Zero              | [bcm2835]   | [pi/pizero]   |
+| Broadcom BCM2835 | Pi 1 Model A+ (v1.2) | [bcm2835]   | [pi/pi1]      |
+| Broadcom BCM2835 | Pi 1 Model B+ (v1.2) | [bcm2835]   | [pi/pi1]      |
+| Broadcom BCM2836 | Pi 2 Model B (v1.1)  | [bcm2835]   | [pi/pi2]      |
+
+[bcm2835]:   https://github.com/usbarmory/tamago/tree/master/soc/bcm2835
+[pi/pizero]: https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pizero
+[pi/pi1]:    https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pi1
+[pi/pi2]:    https://github.com/usbarmory/tamago/tree/master/board/raspberrypi/pi2
 
 Compiling
 =========
@@ -127,12 +132,12 @@ GOARM & Examples
 
 The GOARM environment variable must be set according to the Raspberry Pi model:
 
-| Model | GOARM | Example                                                     |
-|-------|-------|-------------------------------------------------------------|
-| Zero  |   5   | <https://github.com/usbarmory/tamago-example-pizero>        |
-| 1A+   |   5   | <https://github.com/prusnak/tamago-example-pi1>             |
-| 1B+   |   5   | <https://github.com/prusnak/tamago-example-pi1>             |
-| 2B    |   7   | <https://github.com/kenbell/tamago-example-pi2>             |
+| Model | GOARM | Example                                              |
+|-------|-------|------------------------------------------------------|
+| Zero  | 5     | <https://github.com/usbarmory/tamago-example-pizero> |
+| 1A+   | 5     | <https://github.com/prusnak/tamago-example-pi1>      |
+| 1B+   | 5     | <https://github.com/prusnak/tamago-example-pi1>      |
+| 2B    | 7     | <https://github.com/kenbell/tamago-example-pi2>      |
 
 NOTE: The Pi Zero and Pi 1 are ARMv6, but do not have support for all floating point instructions the Go compiler
 generates with `GOARM=6`.  Using `GOARM=5` causes Go to include a software floating point implementation.

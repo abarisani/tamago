@@ -44,9 +44,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC          | Board                                                                        | SoC package                                                               | Board package                                                                        |
-|--------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| SiFive FU540 | [QEMU sifive_u](https://www.qemu.org/docs/master/system/riscv/sifive_u.html) | [fu540](https://github.com/usbarmory/tamago/tree/master/soc/sifive/fu540) | [qemu/sifive_u](https://github.com/usbarmory/tamago/tree/master/board/qemu/sifive_u) |
+| SoC          | Board           | SoC package | Board package   |
+|--------------|-----------------|-------------|-----------------|
+| SiFive FU540 | [QEMU sifive_u] | [fu540]     | [qemu/sifive_u] |
+
+[QEMU sifive_u]: https://www.qemu.org/docs/master/system/riscv/sifive_u.html
+[fu540]:         https://github.com/usbarmory/tamago/tree/master/soc/sifive/fu540
+[qemu/sifive_u]: https://github.com/usbarmory/tamago/tree/master/board/qemu/sifive_u
 
 Compiling
 =========

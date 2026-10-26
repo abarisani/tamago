@@ -44,9 +44,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Board                                                      | SoC package                                                                    | Board package                                                                            |
-|-------------------|------------------------------------------------------------|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| AI Foundry Erbium | [erbium_emu](https://github.com/aifoundry-org/et-platform) | [erbium](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/erbium) | [erbium_emu](https://github.com/usbarmory/tamago/tree/master/board/aifoundry/erbium_emu) |
+| SoC               | Board                     | SoC package | Board package                            |
+|-------------------|---------------------------|-------------|------------------------------------------|
+| AI Foundry Erbium | [erbium_emu][et-platform] | [erbium]    | [erbium_emu][board/aifoundry/erbium_emu] |
+
+[et-platform]:                https://github.com/aifoundry-org/et-platform
+[erbium]:                     https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/erbium
+[board/aifoundry/erbium_emu]: https://github.com/usbarmory/tamago/tree/master/board/aifoundry/erbium_emu
 
 Compiling
 =========

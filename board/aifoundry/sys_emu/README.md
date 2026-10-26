@@ -44,9 +44,14 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| Processor         | Board                                                                         | SoC package                                                                    | Processor package                                                                            | Board package                                                                      |
-|-------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| AI Foundry Minion | [sys_emu](https://github.com/aifoundry-org/et-platform/tree/master/sw-sysemu) | [etsoc1](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1) | [etsoc1/minion](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1/minion) | [sys_emu](https://github.com/usbarmory/tamago/tree/master/board/aifoundry/sys_emu) |
+| Processor         | Board                            | SoC package | Processor package | Board package                      |
+|-------------------|----------------------------------|-------------|-------------------|------------------------------------|
+| AI Foundry Minion | [sys_emu][et-platform/sw-sysemu] | [etsoc1]    | [etsoc1/minion]   | [sys_emu][board/aifoundry/sys_emu] |
+
+[et-platform/sw-sysemu]:   https://github.com/aifoundry-org/et-platform/tree/master/sw-sysemu
+[etsoc1]:                  https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1
+[etsoc1/minion]:           https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1/minion
+[board/aifoundry/sys_emu]: https://github.com/usbarmory/tamago/tree/master/board/aifoundry/sys_emu
 
 Compiling
 =========

@@ -39,11 +39,17 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU                    | Related platform packages                                                              | Core drivers                                                                                                                         |
-|------------------------|----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| ARM Cortex-A7 (ARMv7A) | [usbarmory/mk2](https://github.com/usbarmory/tamago/tree/master/board/usbarmory/mk2)   | [GIC](https://github.com/usbarmory/tamago/tree/master/arm/gic), [TZC380](https://github.com/usbarmory/tamago/tree/master/arm/tzc380) |
-| ARM1176JZF-S  (ARMv6Z) | [raspberrypi](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi)       |                                                                                                                                      |
-| ARMv5TEJ     (ARMv5TE) | [nuc980iiot](https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot) |
+| CPU                    | Related platform packages | Core drivers    |
+|------------------------|---------------------------|-----------------|
+| ARM Cortex-A7 (ARMv7A) | [usbarmory/mk2]           | [GIC], [TZC380] |
+| ARM1176JZF-S  (ARMv6Z) | [raspberrypi]             |                 |
+| ARMv5TEJ     (ARMv5TE) | [nuc980iiot]              |                 |
+
+[usbarmory/mk2]: https://github.com/usbarmory/tamago/tree/master/board/usbarmory/mk2
+[GIC]:           https://github.com/usbarmory/tamago/tree/master/arm/gic
+[TZC380]:        https://github.com/usbarmory/tamago/tree/master/arm/tzc380
+[raspberrypi]:   https://github.com/usbarmory/tamago/tree/master/board/raspberrypi
+[nuc980iiot]:    https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot
 
 Build tags
 ==========

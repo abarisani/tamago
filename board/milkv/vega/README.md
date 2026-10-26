@@ -42,9 +42,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Board                               | SoC package                                                                       | Board package                                                            |
-|-------------------|-------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| Fisilink FSL91030 | [MilkV Vega](https://milkv.io/vega) | [fsl91030](https://github.com/usbarmory/tamago/tree/master/soc/fisilink/fsl91030) | [vega](https://github.com/usbarmory/tamago/tree/master/board/milkv/vega) |
+| SoC               | Board        | SoC package | Board package |
+|-------------------|--------------|-------------|---------------|
+| Fisilink FSL91030 | [MilkV Vega] | [fsl91030]  | [vega]        |
+
+[MilkV Vega]: https://milkv.io/vega
+[fsl91030]:   https://github.com/usbarmory/tamago/tree/master/soc/fisilink/fsl91030
+[vega]:       https://github.com/usbarmory/tamago/tree/master/board/milkv/vega
 
 Compiling
 =========

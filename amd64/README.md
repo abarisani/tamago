@@ -39,13 +39,24 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU              | Related platform packages                                                                        | Core drivers                                                                                                                         | Peripheral drivers                                                                                                                                                       |
-|------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| AMD/Intel 64-bit | [cloud_hypervisor/vm](https://github.com/usbarmory/tamago/tree/master/board/cloud_hypervisor/vm) | [LAPIC](https://github.com/usbarmory/tamago/tree/master/amd64/lapic)                                                                 | [KVM clock, VirtIO PCI](https://github.com/usbarmory/tamago/tree/master/kvm), [IOAPIC, NVMe, PCI, RTC, UART](https://github.com/usbarmory/tamago/blob/master/soc/intel)        |
-| AMD/Intel 64-bit | [qemu/microvm](https://github.com/usbarmory/tamago/tree/master/board/qemu/microvm)               | [LAPIC](https://github.com/usbarmory/tamago/tree/master/amd64/lapic), [SEV](https://github.com/usbarmory/tamago/tree/master/kvm/sev) | [KVM clock, VirtIO MMIO](https://github.com/usbarmory/tamago/tree/master/kvm), [IOAPIC, NVMe, RTC, UART](https://github.com/usbarmory/tamago/blob/master/soc/intel)            |
-| AMD/Intel 64-bit | [firecracker/microvm](https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm) | [LAPIC](https://github.com/usbarmory/tamago/tree/master/amd64/lapic)                                                                 | [KVM clock, VirtIO MMIO](https://github.com/usbarmory/tamago/tree/master/kvm), [IOAPIC, NVMe, UART](https://github.com/usbarmory/tamago/blob/master/soc/intel)                 |
-| AMD/Intel 64-bit | [google/gcp](https://github.com/usbarmory/tamago/tree/master/board/google/gcp)                   | [LAPIC](https://github.com/usbarmory/tamago/tree/master/amd64/lapic), [SEV](https://github.com/usbarmory/tamago/tree/master/kvm/sev) | [KVM clock, VirtIO PCI, gVNIC](https://github.com/usbarmory/tamago/tree/master/kvm), [IOAPIC, NVMe, PCI, RTC, UART](https://github.com/usbarmory/tamago/blob/master/soc/intel) |
-| AMD/Intel 64-bit | [uefi/x64](https://github.com/usbarmory/go-boot/tree/main/uefi/x64)                              | [SEV](https://github.com/usbarmory/tamago/tree/master/kvm/sev)                                                                       | [EFI Console I/O, Graphics, Boot and Runtime Services](https://github.com/usbarmory/go-boot/tree/main/uefi)                                                                    |
+| CPU              | Related platform packages | Core drivers   | Peripheral drivers                                                             |
+|------------------|---------------------------|----------------|--------------------------------------------------------------------------------|
+| AMD/Intel 64-bit | [cloud_hypervisor/vm]     | [LAPIC]        | [KVM clock, VirtIO PCI][kvm], [IOAPIC, NVMe, PCI, RTC, UART][soc/intel]        |
+| AMD/Intel 64-bit | [qemu/microvm]            | [LAPIC], [SEV] | [KVM clock, VirtIO MMIO][kvm], [IOAPIC, NVMe, RTC, UART][soc/intel]            |
+| AMD/Intel 64-bit | [firecracker/microvm]     | [LAPIC]        | [KVM clock, VirtIO MMIO][kvm], [IOAPIC, NVMe, UART][soc/intel]                 |
+| AMD/Intel 64-bit | [google/gcp]              | [LAPIC], [SEV] | [KVM clock, VirtIO PCI, gVNIC][kvm], [IOAPIC, NVMe, PCI, RTC, UART][soc/intel] |
+| AMD/Intel 64-bit | [uefi/x64]                | [SEV]          | [EFI Console I/O, Graphics, Boot and Runtime Services][go-boot/uefi]           |
+
+[cloud_hypervisor/vm]: https://github.com/usbarmory/tamago/tree/master/board/cloud_hypervisor/vm
+[LAPIC]:               https://github.com/usbarmory/tamago/tree/master/amd64/lapic
+[kvm]:                 https://github.com/usbarmory/tamago/tree/master/kvm
+[soc/intel]:           https://github.com/usbarmory/tamago/blob/master/soc/intel
+[qemu/microvm]:        https://github.com/usbarmory/tamago/tree/master/board/qemu/microvm
+[SEV]:                 https://github.com/usbarmory/tamago/tree/master/kvm/sev
+[firecracker/microvm]: https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm
+[google/gcp]:          https://github.com/usbarmory/tamago/tree/master/board/google/gcp
+[uefi/x64]:            https://github.com/usbarmory/go-boot/tree/main/uefi/x64
+[go-boot/uefi]:        https://github.com/usbarmory/go-boot/tree/main/uefi
 
 Build tags
 ==========

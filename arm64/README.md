@@ -39,10 +39,14 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU                     | Related platform packages                                                                          | Core drivers                                                     |
-|-------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| ARM Cortex-A53 (ARMv8A) | [nxp/imx8mpevk](https://github.com/usbarmory/tamago/tree/master/board/nxp/imx8mpevk)               | [GIC](https://github.com/usbarmory/tamago/tree/master/arm64/gic) |
-| ARM Cortex-A53 (ARMv8A) | [microchip/lan9696evb](https://github.com/usbarmory/tamago/tree/master/board/microchip/lan9696evb) | [GIC](https://github.com/usbarmory/tamago/tree/master/arm64/gic) |
+| CPU                     | Related platform packages | Core drivers |
+|-------------------------|---------------------------|--------------|
+| ARM Cortex-A53 (ARMv8A) | [nxp/imx8mpevk]           | [GIC]        |
+| ARM Cortex-A53 (ARMv8A) | [microchip/lan9696evb]    | [GIC]        |
+
+[nxp/imx8mpevk]:        https://github.com/usbarmory/tamago/tree/master/board/nxp/imx8mpevk
+[GIC]:                  https://github.com/usbarmory/tamago/tree/master/arm64/gic
+[microchip/lan9696evb]: https://github.com/usbarmory/tamago/tree/master/board/microchip/lan9696evb
 
 Build tags
 ==========

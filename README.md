@@ -69,13 +69,25 @@ Supported AMD64 targets
 The following table summarizes currently supported x86-64 targets
 (`GOOS=tamago GOARCH=amd64`).
 
-| CPU              | Platform                                                                  | CPU package                                                    | Platform package                                                                                                                                    |
-|------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| AMD/Intel 64-bit | [Cloud Hypervisor](https://www.cloudhypervisor.org )                      | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [cloud_hypervisor/vm](https://github.com/usbarmory/tamago/tree/master/board/cloud_hypervisor/vm)                                                    |
-| AMD/Intel 64-bit | [Firecracker microvm](https://firecracker-microvm.github.io)              | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [firecracker/microvm](https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm)                                                    |
-| AMD/Intel 64-bit | [QEMU microvm](https://www.qemu.org/docs/master/system/i386/microvm.html) | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [qemu/microvm](https://github.com/usbarmory/tamago/tree/master/board/qemu/microvm)                                                                  |
-| AMD/Intel 64-bit | [UEFI](https://uefi.org/)                                                 | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [uefi/x64](https://github.com/usbarmory/go-boot/tree/main/uefi/x64)                                                                                 |
-| AMD/Intel 64-bit | [Google Compute Engine](https://cloud.google.com/products/compute)        | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [google/gcp](https://github.com/usbarmory/tamago/tree/master/board/google/gcp), [uefi/x64](https://github.com/usbarmory/go-boot/tree/main/uefi/x64) |
+| CPU              | Platform                | CPU package | Platform package         |
+|------------------|-------------------------|-------------|--------------------------|
+| AMD/Intel 64-bit | [Cloud Hypervisor]      | [amd64]     | [cloud_hypervisor/vm]    |
+| AMD/Intel 64-bit | [Firecracker microvm]   | [amd64]     | [firecracker/microvm]    |
+| AMD/Intel 64-bit | [QEMU microvm]          | [amd64]     | [qemu/microvm]           |
+| AMD/Intel 64-bit | [UEFI]                  | [amd64]     | [uefi/x64]               |
+| AMD/Intel 64-bit | [Google Compute Engine] | [amd64]     | [google/gcp], [uefi/x64] |
+
+[Cloud Hypervisor]:      https://www.cloudhypervisor.org
+[amd64]:                 https://github.com/usbarmory/tamago/tree/master/amd64
+[cloud_hypervisor/vm]:   https://github.com/usbarmory/tamago/tree/master/board/cloud_hypervisor/vm
+[Firecracker microvm]:   https://firecracker-microvm.github.io
+[firecracker/microvm]:   https://github.com/usbarmory/tamago/tree/master/board/firecracker/microvm
+[QEMU microvm]:          https://www.qemu.org/docs/master/system/i386/microvm.html
+[qemu/microvm]:          https://github.com/usbarmory/tamago/tree/master/board/qemu/microvm
+[UEFI]:                  https://uefi.org/
+[uefi/x64]:              https://github.com/usbarmory/go-boot/tree/main/uefi/x64
+[Google Compute Engine]: https://cloud.google.com/products/compute
+[google/gcp]:            https://github.com/usbarmory/tamago/tree/master/board/google/gcp
 
 Supported ARM targets
 =====================
@@ -83,16 +95,34 @@ Supported ARM targets
 The following table summarizes currently supported ARM SoCs and boards
 (`GOOS=tamago GOARCH=arm`).
 
-| SoC                   | Board                                                                                                                                                                                | SoC package                                                                  | Board package                                                                          |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| NXP i.MX6ULZ/i.MX6UL  | [USB armory Mk II](https://github.com/usbarmory/usbarmory/wiki/Mk-II-Introduction)                                                                                                   | [imx6ul](https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx6ul)     | [usbarmory/mk2](https://github.com/usbarmory/tamago/tree/master/board/usbarmory)       |
-| NXP i.MX6ULL/i.MX6UL  | [USB armory Mk II LAN](https://github.com/usbarmory/usbarmory/wiki/Mk-II-LAN)                                                                                                        | [imx6ul](https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx6ul)     | [usbarmory/mk2](https://github.com/usbarmory/tamago/tree/master/board/usbarmory)       |
-| NXP i.MX6ULL/i.MX6ULZ | [MCIMX6ULL-EVK](https://www.nxp.com/design/development-boards/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-6ull-and-6ulz-applications-processor:MCIMX6ULL-EVK) | [imx6ul](https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx6ul)     | [mx6ullevk](https://github.com/usbarmory/tamago/tree/master/board/nxp/mx6ullevk)       |
-| Broadcom BCM2835      | [Raspberry Pi Zero](https://www.raspberrypi.org/products/raspberry-pi-zero)                                                                                                          | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835)       | [pi/pizero](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi)         |
-| Broadcom BCM2835      | [Raspberry Pi 1 Model A+](https://www.raspberrypi.org/products/raspberry-pi-1-model-a-plus/)                                                                                         | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835)       | [pi/pi1](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi)            |
-| Broadcom BCM2835      | [Raspberry Pi 1 Model B+](https://www.raspberrypi.org/products/raspberry-pi-1-model-b-plus/)                                                                                         | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835)       | [pi/pi1](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi)            |
-| Broadcom BCM2836      | [Raspberry Pi 2 Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b)                                                                                                | [bcm2835](https://github.com/usbarmory/tamago/tree/master/soc/bcm2835)       | [pi/pi2](https://github.com/usbarmory/tamago/tree/master/board/raspberrypi)            |
-| Nuvoton NUC980        | [NuMaker-IIoT-NUC980G2](https://www.nuvoton.com/products/iot-solution/iot-platform/numaker-iiot-nuc980g2)                                                                            | [nuc980](https://github.com/usbarmory/tamago/tree/master/soc/nuvoton/nuc980) | [nuc980iiot](https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot) |
+| SoC                   | Board                     | SoC package | Board package   |
+|-----------------------|---------------------------|-------------|-----------------|
+| NXP i.MX6ULZ/i.MX6UL  | [USB armory Mk II]        | [imx6ul]    | [usbarmory/mk2] |
+| NXP i.MX6ULL/i.MX6UL  | [USB armory Mk II LAN]    | [imx6ul]    | [usbarmory/mk2] |
+| NXP i.MX6ULL/i.MX6ULZ | [MCIMX6ULL-EVK]           | [imx6ul]    | [mx6ullevk]     |
+| Broadcom BCM2835      | [Raspberry Pi Zero]       | [bcm2835]   | [pi/pizero]     |
+| Broadcom BCM2835      | [Raspberry Pi 1 Model A+] | [bcm2835]   | [pi/pi1]        |
+| Broadcom BCM2835      | [Raspberry Pi 1 Model B+] | [bcm2835]   | [pi/pi1]        |
+| Broadcom BCM2836      | [Raspberry Pi 2 Model B]  | [bcm2835]   | [pi/pi2]        |
+| Nuvoton NUC980        | [NuMaker-IIoT-NUC980G2]   | [nuc980]    | [nuc980iiot]    |
+
+[USB armory Mk II]:        https://github.com/usbarmory/usbarmory/wiki/Mk-II-Introduction
+[imx6ul]:                  https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx6ul
+[usbarmory/mk2]:           https://github.com/usbarmory/tamago/tree/master/board/usbarmory
+[USB armory Mk II LAN]:    https://github.com/usbarmory/usbarmory/wiki/Mk-II-LAN
+[MCIMX6ULL-EVK]:           https://www.nxp.com/design/development-boards/i-mx-evaluation-and-development-boards/evaluation-kit-for-the-i-mx-6ull-and-6ulz-applications-processor:MCIMX6ULL-EVK
+[mx6ullevk]:               https://github.com/usbarmory/tamago/tree/master/board/nxp/mx6ullevk
+[Raspberry Pi Zero]:       https://www.raspberrypi.org/products/raspberry-pi-zero
+[bcm2835]:                 https://github.com/usbarmory/tamago/tree/master/soc/bcm2835
+[pi/pizero]:               https://github.com/usbarmory/tamago/tree/master/board/raspberrypi
+[Raspberry Pi 1 Model A+]: https://www.raspberrypi.org/products/raspberry-pi-1-model-a-plus/
+[pi/pi1]:                  https://github.com/usbarmory/tamago/tree/master/board/raspberrypi
+[Raspberry Pi 1 Model B+]: https://www.raspberrypi.org/products/raspberry-pi-1-model-b-plus/
+[Raspberry Pi 2 Model B]:  https://www.raspberrypi.org/products/raspberry-pi-2-model-b
+[pi/pi2]:                  https://github.com/usbarmory/tamago/tree/master/board/raspberrypi
+[NuMaker-IIoT-NUC980G2]:   https://www.nuvoton.com/products/iot-solution/iot-platform/numaker-iiot-nuc980g2
+[nuc980]:                  https://github.com/usbarmory/tamago/tree/master/soc/nuvoton/nuc980
+[nuc980iiot]:              https://github.com/usbarmory/tamago/tree/master/board/nuvoton/nuc980iiot
 
 Supported ARM64 targets
 =======================
@@ -100,10 +130,17 @@ Supported ARM64 targets
 The following table summarizes currently supported ARM64 SoCs and boards
 (`GOOS=tamago GOARCH=arm64`).
 
-| SoC               | Board                                                                                                    | SoC package                                                                      | Board package                                                                            |
-|-------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| NXP i.MX8M Plus   | [8MPLUSLPD4-EVK](https://www.nxp.com/design/design-center/development-boards-and-designs/8MPLUSLPD4-EVK) | [imx8mp](https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx8mp)         | [imx8mpevk](https://github.com/usbarmory/tamago/tree/master/board/nxp/imx8mpevk)         |
-| Microchip LAN969x | [EVB-LAN9696-24port](https://www.microchip.com/en-us/development-tool/ev23x71a)                          | [lan969x](https://github.com/usbarmory/tamago/tree/master/soc/microchip/lan969x) | [lan9696evb](https://github.com/usbarmory/tamago/tree/master/board/microchip/lan9696evb) |
+| SoC               | Board                | SoC package | Board package |
+|-------------------|----------------------|-------------|---------------|
+| NXP i.MX8M Plus   | [8MPLUSLPD4-EVK]     | [imx8mp]    | [imx8mpevk]   |
+| Microchip LAN969x | [EVB-LAN9696-24port] | [lan969x]   | [lan9696evb]  |
+
+[8MPLUSLPD4-EVK]:     https://www.nxp.com/design/design-center/development-boards-and-designs/8MPLUSLPD4-EVK
+[imx8mp]:             https://github.com/usbarmory/tamago/tree/master/soc/nxp/imx8mp
+[imx8mpevk]:          https://github.com/usbarmory/tamago/tree/master/board/nxp/imx8mpevk
+[EVB-LAN9696-24port]: https://www.microchip.com/en-us/development-tool/ev23x71a
+[lan969x]:            https://github.com/usbarmory/tamago/tree/master/soc/microchip/lan969x
+[lan9696evb]:         https://github.com/usbarmory/tamago/tree/master/board/microchip/lan9696evb
 
 Supported RISC-V targets
 ========================
@@ -111,13 +148,28 @@ Supported RISC-V targets
 The following table summarizes currently supported RISC-V SoCs and boards
 (`GOOS=tamago GOARCH=riscv64`).
 
-| SoC                 | Board                                                                         | SoC package                                                                       | Board package                                                                            |
-|---------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| AI Foundry Erbium   | [erbium_emu](https://github.com/aifoundry-org/et-platform)                    | [erbium](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/erbium)    | [erbium_emu](https://github.com/usbarmory/tamago/tree/master/board/aifoundry/erbium_emu) |
-| AI Foundry ET-SoC-1 | [sys_emu](https://github.com/aifoundry-org/et-platform/tree/master/sw-sysemu) | [etsoc1](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1)    | [sys_emu](https://github.com/usbarmory/tamago/tree/master/board/aifoundry/sys_emu)       |
-| Fisilink FSL91030   | [MilkV Vega](https://milkv.io/vega)                                           | [fsl91030](https://github.com/usbarmory/tamago/tree/master/soc/fisilink/fsl91030) | [vega](https://github.com/usbarmory/tamago/tree/master/board/milkv/vega)                 |
-| Fisilink FSL91030   | [Nuclei QEMU](https://doc.nucleisys.com/nuclei_tools/qemu/index.html)         | [fsl91030](https://github.com/usbarmory/tamago/tree/master/soc/fisilink/fsl91030) | [eval_soc](https://github.com/usbarmory/tamago/tree/master/board/nuclei/eval_soc)        |
-| SiFive FU540        | [QEMU sifive_u](https://www.qemu.org/docs/master/system/riscv/sifive_u.html)  | [fu540](https://github.com/usbarmory/tamago/tree/master/soc/sifive/fu540)         | [qemu/sifive_u](https://github.com/usbarmory/tamago/tree/master/board/qemu/sifive_u)     |
+| SoC                 | Board                            | SoC package | Board package                            |
+|---------------------|----------------------------------|-------------|------------------------------------------|
+| AI Foundry Erbium   | [erbium_emu][et-platform]        | [erbium]    | [erbium_emu][board/aifoundry/erbium_emu] |
+| AI Foundry ET-SoC-1 | [sys_emu][et-platform/sw-sysemu] | [etsoc1]    | [sys_emu][board/aifoundry/sys_emu]       |
+| Fisilink FSL91030   | [MilkV Vega]                     | [fsl91030]  | [vega]                                   |
+| Fisilink FSL91030   | [Nuclei QEMU]                    | [fsl91030]  | [eval_soc]                               |
+| SiFive FU540        | [QEMU sifive_u]                  | [fu540]     | [qemu/sifive_u]                          |
+
+[et-platform]:                https://github.com/aifoundry-org/et-platform
+[erbium]:                     https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/erbium
+[board/aifoundry/erbium_emu]: https://github.com/usbarmory/tamago/tree/master/board/aifoundry/erbium_emu
+[et-platform/sw-sysemu]:      https://github.com/aifoundry-org/et-platform/tree/master/sw-sysemu
+[etsoc1]:                     https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1
+[board/aifoundry/sys_emu]:    https://github.com/usbarmory/tamago/tree/master/board/aifoundry/sys_emu
+[MilkV Vega]:                 https://milkv.io/vega
+[fsl91030]:                   https://github.com/usbarmory/tamago/tree/master/soc/fisilink/fsl91030
+[vega]:                       https://github.com/usbarmory/tamago/tree/master/board/milkv/vega
+[Nuclei QEMU]:                https://doc.nucleisys.com/nuclei_tools/qemu/index.html
+[eval_soc]:                   https://github.com/usbarmory/tamago/tree/master/board/nuclei/eval_soc
+[QEMU sifive_u]:              https://www.qemu.org/docs/master/system/riscv/sifive_u.html
+[fu540]:                      https://github.com/usbarmory/tamago/tree/master/soc/sifive/fu540
+[qemu/sifive_u]:              https://github.com/usbarmory/tamago/tree/master/board/qemu/sifive_u
 
 Supported LoongArch targets
 ===========================
@@ -125,9 +177,13 @@ Supported LoongArch targets
 The following table summarizes currently supported LoongArch SoCs and boards
 (`GOOS=tamago GOARCH=loong64`).
 
-| SoC             | Board                                                                    | SoC package                                                                       | Board package                                                                |
-|-----------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| Loongson 3A5000 | [QEMU virt](https://www.qemu.org/docs/master/system/loongarch/virt.html) | [ls3a5000](https://github.com/usbarmory/tamago/tree/master/soc/loongson/ls3a5000) | [qemu/virt](https://github.com/usbarmory/tamago/tree/master/board/qemu/virt) |
+| SoC             | Board       | SoC package | Board package |
+|-----------------|-------------|-------------|---------------|
+| Loongson 3A5000 | [QEMU virt] | [ls3a5000]  | [qemu/virt]   |
+
+[QEMU virt]: https://www.qemu.org/docs/master/system/loongarch/virt.html
+[ls3a5000]:  https://github.com/usbarmory/tamago/tree/master/soc/loongson/ls3a5000
+[qemu/virt]: https://github.com/usbarmory/tamago/tree/master/board/qemu/virt
 
 Userspace targets
 =================
@@ -147,11 +203,17 @@ runtime to directly access OS resources, this results in:
 
 The following table summarizes currently available userspace support:
 
-| Operating System                             | `GOARCH`                | Runtime packages                                                                            |
-|----------------------------------------------|-------------------------|---------------------------------------------------------------------------------------------|
-| [Linux](https://www.kernel.org/)             | amd64,arm,arm64,riscv64 | [goospkg](https://github.com/usbarmory/tamago-go/blob/latest/src/internal/runtime/goospkg)¹ |
-| [Linux](https://www.kernel.org/)             | amd64,arm,arm64,riscv64 | [linux](https://github.com/usbarmory/tamago/tree/master/user/linux)                         |
-| [GoTEE](https://github.com/usbarmory/GoTEE/) |             arm,riscv64 | [applet](https://pkg.go.dev/github.com/usbarmory/GoTEE/applet)                              |
+| Operating System | `GOARCH`                | Runtime packages    |
+|------------------|-------------------------|---------------------|
+| [Linux][kernel]  | amd64,arm,arm64,riscv64 | [goospkg]¹          |
+| [Linux][kernel]  | amd64,arm,arm64,riscv64 | [linux][user/linux] |
+| [GoTEE]          | arm,riscv64             | [applet]            |
+
+[kernel]:     https://www.kernel.org/
+[goospkg]:    https://github.com/usbarmory/tamago-go/blob/latest/src/internal/runtime/goospkg
+[user/linux]: https://github.com/usbarmory/tamago/tree/master/user/linux
+[GoTEE]:      https://github.com/usbarmory/GoTEE/
+[applet]:     https://pkg.go.dev/github.com/usbarmory/GoTEE/applet
 
 ¹ Used to run [standard distribution tests](https://github.com/usbarmory/tamago/wiki/Compatibility) and `go test -tags user_linux`
 

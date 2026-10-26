@@ -46,9 +46,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| CPU              | Board                                                                     | CPU package                                                    | Board package                                                                      |
-|------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|------------------------------------------------------------------------------------|
-| AMD/Intel 64-bit | [QEMU microvm](https://www.qemu.org/docs/master/system/i386/microvm.html) | [amd64](https://github.com/usbarmory/tamago/tree/master/amd64) | [qemu/microvm](https://github.com/usbarmory/tamago/tree/master/board/qemu/microvm) |
+| CPU              | Board          | CPU package | Board package  |
+|------------------|----------------|-------------|----------------|
+| AMD/Intel 64-bit | [QEMU microvm] | [amd64]     | [qemu/microvm] |
+
+[QEMU microvm]: https://www.qemu.org/docs/master/system/i386/microvm.html
+[amd64]:        https://github.com/usbarmory/tamago/tree/master/amd64
+[qemu/microvm]: https://github.com/usbarmory/tamago/tree/master/board/qemu/microvm
 
 Compiling
 =========

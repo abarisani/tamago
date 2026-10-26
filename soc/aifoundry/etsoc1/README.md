@@ -40,9 +40,13 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| Processor                    | Related board packages                                                             | Processor package                                                                            | Peripheral drivers                                                    |
-|------------------------------|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| AI Foundry Minion            | [sys_emu](https://github.com/usbarmory/tamago/tree/master/board/aifoundry/sys_emu) | [etsoc1/minion](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1/minion) | [UART](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry) |
+| Processor         | Related board packages | Processor package | Peripheral drivers |
+|-------------------|------------------------|-------------------|--------------------|
+| AI Foundry Minion | [sys_emu]              | [etsoc1/minion]   | [UART]             |
+
+[sys_emu]:       https://github.com/usbarmory/tamago/tree/master/board/aifoundry/sys_emu
+[etsoc1/minion]: https://github.com/usbarmory/tamago/tree/master/soc/aifoundry/etsoc1/minion
+[UART]:          https://github.com/usbarmory/tamago/tree/master/soc/aifoundry
 
 > [!TIP]
 > The ET-Soc-1 mixes RISC-V cores with different ISA and access levels

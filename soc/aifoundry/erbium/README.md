@@ -40,9 +40,12 @@ The package API documentation can be found on
 Supported hardware
 ==================
 
-| SoC               | Related board packages                                                                   | Peripheral drivers                                                    |
-|-------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| AI Foundry Erbium | [erbium_emu](https://github.com/usbarmory/tamago/tree/master/board/aifoundry/erbium_emu) | [UART](https://github.com/usbarmory/tamago/tree/master/soc/aifoundry) |
+| SoC               | Related board packages | Peripheral drivers |
+|-------------------|------------------------|--------------------|
+| AI Foundry Erbium | [erbium_emu]           | [UART]             |
+
+[erbium_emu]: https://github.com/usbarmory/tamago/tree/master/board/aifoundry/erbium_emu
+[UART]:       https://github.com/usbarmory/tamago/tree/master/soc/aifoundry
 
 Soft float requirement
 ======================
