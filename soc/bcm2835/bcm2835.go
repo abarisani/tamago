@@ -42,7 +42,7 @@ var ramStackOffset uintptr = 0x100000 // 1 MB
 
 //go:linkname nanotime internal/runtime/goospkg.Nanotime
 func nanotime(monotonic bool) (ns int64) {
-	ns = int64(float64(read_systimer())*ARM.TimerMultiplier)
+	ns = int64(float64(read_systimer()) * ARM.TimerMultiplier)
 
 	if monotonic {
 		return
