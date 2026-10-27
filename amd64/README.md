@@ -42,8 +42,8 @@ Supported hardware
 | CPU              | Related platform packages | Core drivers   | Peripheral drivers                                                             |
 |------------------|---------------------------|----------------|--------------------------------------------------------------------------------|
 | AMD/Intel 64-bit | [cloud_hypervisor/vm]     | [LAPIC]        | [KVM clock, VirtIO PCI][kvm], [IOAPIC, NVMe, PCI, RTC, UART][soc/intel]        |
-| AMD/Intel 64-bit | [qemu/microvm]            | [LAPIC], [SEV] | [KVM clock, VirtIO MMIO][kvm], [IOAPIC, NVMe, RTC, UART][soc/intel]            |
-| AMD/Intel 64-bit | [firecracker/microvm]     | [LAPIC]        | [KVM clock, VirtIO MMIO][kvm], [IOAPIC, NVMe, UART][soc/intel]                 |
+| AMD/Intel 64-bit | [qemu/microvm]            | [LAPIC], [SEV] | [KVM clock, VirtIO MMIO][kvm], [IOAPIC, RTC, UART][soc/intel]                  |
+| AMD/Intel 64-bit | [firecracker/microvm]     | [LAPIC]        | [KVM clock, VirtIO MMIO][kvm], [IOAPIC, UART][soc/intel]                       |
 | AMD/Intel 64-bit | [google/gcp]              | [LAPIC], [SEV] | [KVM clock, VirtIO PCI, gVNIC][kvm], [IOAPIC, NVMe, PCI, RTC, UART][soc/intel] |
 | AMD/Intel 64-bit | [uefi/x64]                | [SEV]          | [EFI Console I/O, Graphics, Boot and Runtime Services][go-boot/uefi]           |
 
