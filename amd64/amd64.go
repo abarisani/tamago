@@ -36,14 +36,21 @@ const (
 
 // aliased constants
 const (
+	LAPIC_ID   = LAPIC_BASE + lapic.LAPIC_ID
 	LAPIC_EOI  = LAPIC_BASE + lapic.LAPIC_EOI
 	LAPIC_SVR  = LAPIC_BASE + lapic.LAPIC_SVR
 	LAPIC_ICRL = LAPIC_BASE + lapic.LAPIC_ICRL
 
+	ID         = lapic.ID
 	SVR_ENABLE = lapic.SVR_ENABLE
 
 	ICR_DST      = lapic.ICR_DST
 	ICR_DST_REST = lapic.ICR_DST_REST
+
+	LAPIC_TIMER      = LAPIC_BASE + lapic.LAPIC_LVT_TIMER
+	LAPIC_TIMER_INIT = LAPIC_BASE + lapic.LAPIC_LVT_TIMER_INIT
+	LAPIC_TIMER_CUR  = LAPIC_BASE + lapic.LAPIC_LVT_TIMER_CURRENT
+	LAPIC_TIMER_DIV  = LAPIC_BASE + lapic.LAPIC_LVT_TIMER_DIV
 )
 
 //go:linkname ramStackOffset github.com/usbarmory/tamago/mem.RamStackOffset
@@ -68,7 +75,7 @@ type CPU struct {
 	// features
 	features Features
 	// core frequency in Hz
-	freq uint32
+	freq uint64
 
 	// page table allocation state (see ConfigureMMU)
 	mmu mmu

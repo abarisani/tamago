@@ -67,6 +67,13 @@ const (
 	CPUID_KVM_TSC_KHZ = 0x40000010
 )
 
+// QEMU TCG CPUID signature ("TCGTCGTCGTCG", leaf 0x40000000)
+const (
+	TCG_SIGNATURE_EBX = 0x54474354 // "TCGT"
+	TCG_SIGNATURE_ECX = 0x43544743 // "CGTC"
+	TCG_SIGNATURE_EDX = 0x47435447 // "GTCG"
+)
+
 // AMD MSRs
 const (
 	MSR_AMD_PSTATE = 0xc0010064
@@ -74,6 +81,9 @@ const (
 
 // kvmclock MSRs
 const (
+	MSR_KVM_WALL_CLOCK     = 0x11
+	MSR_KVM_WALL_CLOCK_NEW = 0x4b564d00
+
 	MSR_KVM_SYSTEM_TIME     = 0x12
 	MSR_KVM_SYSTEM_TIME_NEW = 0x4b564d01
 )
@@ -92,10 +102,16 @@ type Features struct {
 	// available for the local-APIC timer to support [CPU.SetAlarm].
 	TSCDeadline bool
 
+	// TCG indicates whether QEMU Tiny Code Generator emulation is
+	// detected.
+	TCG bool
+
 	// KVM indicates whether a Kernel-base Virtual Machine is detected.
 	KVM bool
-	// KVMClockMSR returns the kvmclock Model Specific Register.
-	KVMClockMSR uint32
+	// KVMWallClockMSR returns the KVM Wall Clock Model Specific Register.
+	KVMWallClockMSR uint32
+	// KVMSystemTimeMSR returns the KVM System Timer Model Specific Register.
+	KVMSystemTimeMSR uint32
 }
 
 // defined in features.s
@@ -119,25 +135,31 @@ func (cpu *CPU) initFeatures() {
 	_, _, cpuFeatures, _ := cpuid(CPUID_INFO, 0)
 	cpu.features.TSCDeadline = bits.Get(&cpuFeatures, INFO_TSC_DEADLINE)
 
-	if _, kvmk, _, _ := cpuid(CPUID_KVM_SIGNATURE, 0); kvmk != KVM_SIGNATURE {
-		return
+	_, ebx, ecx, edx := cpuid(CPUID_KVM_SIGNATURE, 0)
+
+	if ebx == KVM_SIGNATURE {
+		cpu.features.KVM = true
+		kvmFeatures, _, _, _ := cpuid(CPUID_KVM_FEATURES, 0)
+
+		if bits.Get(&kvmFeatures, FEATURES_CLOCKSOURCE) {
+			cpu.features.KVMWallClockMSR = MSR_KVM_WALL_CLOCK
+			cpu.features.KVMSystemTimeMSR = MSR_KVM_SYSTEM_TIME
+		}
+
+		if bits.Get(&kvmFeatures, FEATURES_CLOCKSOURCE2) {
+			cpu.features.KVMWallClockMSR = MSR_KVM_WALL_CLOCK_NEW
+			cpu.features.KVMSystemTimeMSR = MSR_KVM_SYSTEM_TIME_NEW
+		}
 	}
 
-	cpu.features.KVM = true
-	kvmFeatures, _, _, _ := cpuid(CPUID_KVM_FEATURES, 0)
-
-	if bits.Get(&kvmFeatures, FEATURES_CLOCKSOURCE) {
-		cpu.features.KVMClockMSR = MSR_KVM_SYSTEM_TIME
-	}
-
-	if bits.Get(&kvmFeatures, FEATURES_CLOCKSOURCE2) {
-		cpu.features.KVMClockMSR = MSR_KVM_SYSTEM_TIME_NEW
+	if ebx == TCG_SIGNATURE_EBX && ecx == TCG_SIGNATURE_ECX && edx == TCG_SIGNATURE_EDX {
+		cpu.features.TCG = true
 	}
 }
 
 // Features returns the processor capabilities.
-func (cpu *CPU) Features() *Features {
-	return &cpu.features
+func (cpu *CPU) Features() Features {
+	return cpu.features
 }
 
 func appendBytes(b []byte, args ...uint32) []byte {

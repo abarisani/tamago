@@ -55,6 +55,13 @@ const (
 	// it cannot be serviced by [CPU.ServiceInterrupt] as the IRQ is
 	// handled internally to resume halted processors.
 	IRQ_WAKEUP = 255 // priority 15
+
+	// IRQ_KICK represents the interrupt vector broadcast by [CPU.SetAlarm]
+	// with null deadline to resume halted processors, so that they look
+	// for runnable goroutines. Unlike [IRQ_WAKEUP] it is not recorded for
+	// a later [CPU.WaitInterrupt], a processor which is not halted when
+	// it is taken looks for runnable goroutines anyway before halting.
+	IRQ_KICK = 254 // priority 15
 )
 
 var (
@@ -65,6 +72,9 @@ var (
 	// IRQ handling goroutine and state
 	irqHandling bool
 	irqLock     bool
+
+	// IRQ_WAKEUP taken and not yet consumed by wfi, by LAPIC ID
+	irqWake [256]bool
 )
 
 // defined in irq.s
